@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA-DN – Gunung Artha Digital Network</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#CC0000;--red-l:#FF3333;--red-d:#8B0000;
+  --white:#FFFFFF;--white-d:#FFF5F5;
+  --black:#0A0000;--text:#1A0000;--dim:#880000;
+  --gold:#C9A227;--green:#1a6b2f;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);font-family:'EB Garamond',serif;color:var(--white);overflow-x:hidden;}
+
+.wrap{max-width:920px;margin:0 auto;padding:0 20px;}
+.sec-badge{font-family:'Cinzel',serif;font-size:9px;letter-spacing:5px;color:rgba(204,0,0,.7);text-transform:uppercase;text-align:center;margin-bottom:10px;}
+.sec-title{font-family:'Cinzel Decorative',serif;font-size:clamp(20px,4vw,28px);font-weight:700;text-align:center;line-height:1.25;margin-bottom:6px;}
+.sec-title.red{color:var(--red);}
+.sec-title.white{color:var(--white);}
+.divider{display:flex;align-items:center;gap:12px;margin:14px 0;}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,#CC0000 40%,#FF3333 60%,transparent);}
+.divider.white::before,.divider.white::after{background:linear-gradient(90deg,transparent,#FFFFFF 40%,#FFAAAA 60%,transparent);}
+.star{width:8px;height:8px;background:var(--red);transform:rotate(45deg);flex-shrink:0;}
+.star.white{background:#FFFFFF;}
+.flag-bar{height:5px;background:linear-gradient(90deg,#CC0000 50%,#FFFFFF 50%);}
+.cdeco{position:absolute;border-radius:50%;border:2px solid transparent;background:linear-gradient(var(--black),var(--black)) padding-box,linear-gradient(135deg,#CC0000,#FF3333,#8B0000) border-box;pointer-events:none;}
+
+/* AYAT */
+.ayat-banner{background:linear-gradient(135deg,#8B0000,#CC0000,#8B0000);padding:10px 20px;text-align:center;border-bottom:1px solid rgba(255,255,255,.15);}
+.ayat-arabic{font-family:'EB Garamond',serif;font-size:clamp(13px,1.8vw,17px);color:#FFFFFF;letter-spacing:2px;line-height:1.6;margin-bottom:2px;direction:rtl;}
+.ayat-latin{font-family:'EB Garamond',serif;font-size:11px;color:rgba(255,220,220,.85);font-style:italic;margin-bottom:1px;}
+.ayat-ref{font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;color:rgba(255,200,200,.7);text-transform:uppercase;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,0,0,.97);border-bottom:1px solid rgba(204,0,0,.3);height:52px;display:flex;align-items:stretch;}
+.nav-flag{width:8px;background:linear-gradient(180deg,#CC0000 50%,#FFFFFF 50%);}
+.nav-inner{flex:1;display:flex;justify-content:space-between;align-items:center;padding:0 20px;}
+.nav-brand{font-family:'Cinzel Decorative',serif;font-size:16px;color:var(--red);}
+.nav-sub{font-family:'Cinzel',serif;font-size:7px;letter-spacing:3px;color:rgba(204,0,0,.5);text-transform:uppercase;}
+.nav-links{display:flex;gap:6px;}
+.nav-btn{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:rgba(204,0,0,.7);border:1px solid rgba(204,0,0,.25);background:rgba(204,0,0,.05);padding:6px 14px;cursor:pointer;text-transform:uppercase;text-decoration:none;transition:all .2s;}
+.nav-btn:hover{color:#FF3333;border-color:rgba(204,0,0,.5);background:rgba(204,0,0,.12);}
+.nav-btn.cta{background:var(--red);color:#FFFFFF;border-color:#8B0000;font-weight:700;}
+
+/* HERO */
+#hero{min-height:100vh;position:relative;overflow:hidden;padding-top:52px;display:flex;flex-direction:column;}
+.hero-content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px;text-align:center;position:relative;z-index:10;}
+.hero-title{font-family:'Cinzel Decorative',serif;font-size:clamp(28px,6vw,56px);font-weight:900;color:var(--red);text-shadow:2px 2px 0 #8B0000,0 0 30px rgba(204,0,0,.3);line-height:1.12;margin-bottom:8px;}
+.hero-sub{font-family:'Cinzel',serif;font-size:10px;letter-spacing:5px;color:rgba(204,0,0,.7);text-transform:uppercase;margin-bottom:18px;}
+.hero-desc{font-size:clamp(14px,1.8vw,17px);color:rgba(255,220,220,.88);line-height:1.82;max-width:580px;margin:0 auto 24px;}
+.hero-stats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;}
+.hstat{background:rgba(204,0,0,.12);border:1px solid rgba(204,0,0,.35);padding:10px 16px;text-align:center;min-width:90px;}
+.hstat-v{font-family:'Cinzel Decorative',serif;font-size:15px;color:var(--red);}
+.hstat-l{font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;color:rgba(204,0,0,.6);text-transform:uppercase;margin-top:3px;}
+
+/* SPLIT CARDS */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;max-width:900px;padding:0 20px 40px;}
+.split-card{border:2px solid;padding:28px 22px;text-align:center;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;}
+.split-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.split-card.member{background:linear-gradient(160deg,rgba(204,0,0,.1),rgba(10,0,0,.7));border-color:rgba(204,0,0,.4);}
+.split-card.member::before{background:var(--red);}
+.split-card.member:hover{border-color:rgba(204,0,0,.8);transform:translateY(-4px);box-shadow:0 12px 40px rgba(204,0,0,.2);}
+.split-card.sponsor{background:linear-gradient(160deg,rgba(201,162,39,.12),rgba(10,0,0,.7));border-color:rgba(201,162,39,.4);}
+.split-card.sponsor::before{background:var(--gold);}
+.split-card.sponsor:hover{border-color:rgba(201,162,39,.8);transform:translateY(-4px);box-shadow:0 12px 40px rgba(201,162,39,.15);}
+.sc-icon{font-size:36px;margin-bottom:10px;}
+.sc-tag{display:inline-block;font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;padding:3px 12px;text-transform:uppercase;margin-bottom:10px;}
+.member .sc-tag{color:var(--red);border:1px solid rgba(204,0,0,.4);}
+.sponsor .sc-tag{color:var(--gold);border:1px solid rgba(201,162,39,.4);}
+.sc-title{font-family:'Cinzel Decorative',serif;font-size:17px;font-weight:700;margin-bottom:8px;}
+.member .sc-title{color:var(--red);}
+.sponsor .sc-title{color:var(--gold);}
+.sc-desc{font-size:14px;color:rgba(255,220,220,.85);line-height:1.72;margin-bottom:14px;}
+.sc-list{font-size:13px;color:rgba(255,220,220,.8);text-align:left;margin-bottom:14px;line-height:1.9;}
+.btn-red{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;background:var(--red);color:#FFFFFF;border:none;padding:12px 24px;cursor:pointer;text-transform:uppercase;font-weight:700;transition:all .2s;width:100%;}
+.btn-red:hover{background:#FF2222;}
+.btn-gold{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;background:var(--gold);color:#0A0000;border:none;padding:12px 24px;cursor:pointer;text-transform:uppercase;font-weight:700;transition:all .2s;width:100%;}
+.btn-gold:hover{background:#e0b52a;}
+
+/* SECTIONS */
+.section-dark{background:linear-gradient(180deg,var(--black),#150000,var(--black));padding:56px 0;}
+.section-light{background:linear-gradient(180deg,#FFF5F5,#FFFFFF,#FFF5F5);padding:56px 0;}
+
+/* FEAT GRID */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:24px;}
+.feat-card-d{background:linear-gradient(160deg,rgba(204,0,0,.08),rgba(10,0,0,.6));border:1px solid rgba(204,0,0,.25);padding:20px 18px;position:relative;}
+.feat-card-d::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#CC0000,transparent);}
+.feat-icon{font-size:24px;margin-bottom:8px;}
+.feat-title-d{font-family:'Cinzel',serif;font-size:12px;color:rgba(255,150,150,.9);font-weight:700;margin-bottom:5px;}
+.feat-desc-d{font-size:14px;color:rgba(255,220,220,.8);line-height:1.65;}
+.feat-card-l{background:#FFFFFF;border:1px solid rgba(204,0,0,.15);border-left:4px solid var(--red);padding:20px 18px;box-shadow:0 2px 12px rgba(204,0,0,.08);}
+.feat-title-l{font-family:'Cinzel',serif;font-size:12px;color:#8B0000;font-weight:700;margin-bottom:5px;}
+.feat-desc-l{font-size:14px;color:#1A0000;line-height:1.65;}
+
+/* PAKET TIER */
+.tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:24px;}
+.tier-c{padding:20px 14px;text-align:center;position:relative;border:1px solid;}
+.tier-c::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.tier-c.t1{border-color:rgba(204,0,0,.4);background:linear-gradient(160deg,rgba(204,0,0,.08),rgba(10,0,0,.7));}
+.tier-c.t1::before{background:var(--red);}
+.tier-c.t2{border-color:rgba(180,180,180,.4);background:linear-gradient(160deg,rgba(180,180,180,.08),rgba(10,0,0,.7));}
+.tier-c.t2::before{background:#C0C0C0;}
+.tier-c.t3{border-color:rgba(201,162,39,.4);background:linear-gradient(160deg,rgba(201,162,39,.1),rgba(10,0,0,.7));}
+.tier-c.t3::before{background:var(--gold);}
+.tier-icon{font-size:22px;margin-bottom:5px;}
+.tier-name{font-family:'Cinzel',serif;font-size:12px;font-weight:700;margin-bottom:3px;}
+.t1 .tier-name{color:#FF4444;}.t2 .tier-name{color:#C0C0C0;}.t3 .tier-name{color:var(--gold);}
+.tier-price{font-family:'Cinzel Decorative',serif;font-size:18px;font-weight:900;margin-bottom:5px;}
+.t1 .tier-price{color:#FF4444;}.t2 .tier-price{color:#C0C0C0;}.t3 .tier-price{color:var(--gold);}
+.tier-dl{height:1px;background:linear-gradient(90deg,transparent,rgba(204,0,0,.25),transparent);margin:6px 0;}
+.tier-item{font-size:12px;color:rgba(255,220,220,.8);margin-bottom:3px;}
+.tier-item span{font-weight:600;}
+.t1 .tier-item span{color:#FF4444;}.t2 .tier-item span{color:#C0C0C0;}.t3 .tier-item span{color:var(--gold);}
+
+/* MATRIX VISUAL */
+.matrix-wrap{margin-top:28px;}
+.matrix-title{font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;color:var(--red);text-transform:uppercase;text-align:center;margin-bottom:20px;}
+.matrix-tree{display:flex;flex-direction:column;align-items:center;gap:0;}
+.matrix-row{display:flex;justify-content:center;gap:10px;position:relative;margin-bottom:0;}
+.matrix-line{width:100%;height:30px;position:relative;display:flex;justify-content:center;}
+.matrix-line::before{content:'';position:absolute;top:0;left:50%;width:1px;height:100%;background:rgba(204,0,0,.4);}
+.matrix-line-h{display:flex;width:100%;justify-content:center;height:1px;position:relative;margin-bottom:0;}
+.m-node{width:70px;height:70px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:8px;letter-spacing:1px;text-transform:uppercase;position:relative;text-align:center;}
+.m-node.root{background:linear-gradient(135deg,#CC0000,#8B0000);border:2px solid #FF4444;box-shadow:0 0 20px rgba(204,0,0,.4);color:#fff;font-size:7px;}
+.m-node.l1{background:linear-gradient(135deg,rgba(204,0,0,.2),rgba(10,0,0,.8));border:1px solid rgba(204,0,0,.5);color:rgba(255,150,150,.9);font-size:7px;}
+.m-node.l2{background:rgba(204,0,0,.06);border:1px dashed rgba(204,0,0,.3);color:rgba(204,0,0,.5);font-size:7px;}
+.m-node .n-icon{font-size:18px;margin-bottom:2px;}
+.connector{width:2px;height:24px;background:rgba(204,0,0,.4);margin:0 auto;}
+.connector-h{display:flex;justify-content:space-around;position:relative;}
+.connector-h::before{content:'';position:absolute;top:0;left:25%;right:25%;height:1px;background:rgba(204,0,0,.35);}
+
+/* BONUS BOX */
+.bonus-section{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:24px;}
+.bonus-card{border:1px solid;padding:22px 18px;position:relative;}
+.bonus-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.bc-sponsor{border-color:rgba(204,0,0,.4);background:linear-gradient(160deg,rgba(204,0,0,.06),rgba(10,0,0,.7));}
+.bc-sponsor::before{background:var(--red);}
+.bc-titik{border-color:rgba(201,162,39,.35);background:linear-gradient(160deg,rgba(201,162,39,.06),rgba(10,0,0,.7));}
+.bc-titik::before{background:var(--gold);}
+.bc-reward{border-color:rgba(78,203,113,.35);background:linear-gradient(160deg,rgba(78,203,113,.06),rgba(10,0,0,.7));}
+.bc-reward::before{background:#4ecb71;}
+.bc-icon{font-size:28px;margin-bottom:8px;}
+.bc-title{font-family:'Cinzel',serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.bc-sponsor .bc-title{color:#FF4444;}
+.bc-titik .bc-title{color:var(--gold);}
+.bc-reward .bc-title{color:#4ecb71;}
+.bc-val{font-family:'Cinzel Decorative',serif;font-size:24px;font-weight:900;margin-bottom:6px;}
+.bc-sponsor .bc-val{color:#FF4444;}
+.bc-titik .bc-val{color:var(--gold);}
+.bc-reward .bc-val{color:#4ecb71;}
+.bc-desc{font-size:13px;color:rgba(255,220,220,.8);line-height:1.65;}
+
+/* KALKULATOR */
+.kalc{background:rgba(204,0,0,.05);border:1px solid rgba(204,0,0,.2);padding:24px;margin-top:20px;}
+.kalc-title{font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;color:var(--red);text-transform:uppercase;text-align:center;margin-bottom:16px;}
+.kalc-lbl{font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:2px;color:rgba(204,0,0,.6);text-transform:uppercase;display:flex;justify-content:space-between;margin-bottom:5px;}
+.kalc-lbl span{color:rgba(255,150,150,.9);}
+.pkg-btns{display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;}
+.pkg-btn{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;padding:10px 20px;border:1px solid rgba(204,0,0,.3);background:rgba(204,0,0,.05);color:rgba(204,0,0,.7);cursor:pointer;text-transform:uppercase;transition:all .2s;}
+.pkg-btn.active{background:var(--red);color:#fff;border-color:#8B0000;}
+.kalc-res{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px;}
+.kr{background:rgba(204,0,0,.07);border:1px solid rgba(204,0,0,.2);padding:13px 10px;text-align:center;position:relative;}
+.kr::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#CC0000,transparent);}
+.kr-l{font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:2px;color:rgba(204,0,0,.6);text-transform:uppercase;margin-bottom:5px;}
+.kr-v{font-family:'Cinzel Decorative',serif;font-size:16px;color:var(--red);}
+.kr-s{font-family:'EB Garamond',serif;font-size:10px;color:rgba(204,0,0,.5);font-style:italic;margin-top:2px;}
+.pkg-ind{display:flex;align-items:center;justify-content:center;gap:10px;margin:12px 0;padding:10px;background:rgba(204,0,0,.06);border:1px solid rgba(204,0,0,.2);}
+
+/* REWARD TABLE */
+.reward-table{width:100%;border-collapse:collapse;margin-top:20px;font-size:13px;}
+.reward-table th{font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:10px 12px;background:rgba(204,0,0,.15);color:rgba(255,150,150,.9);border-bottom:1px solid rgba(204,0,0,.3);}
+.reward-table td{padding:10px 12px;border-bottom:1px solid rgba(204,0,0,.12);color:rgba(255,220,220,.85);text-align:center;}
+.reward-table tr:nth-child(even) td{background:rgba(204,0,0,.03);}
+.reward-badge{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;padding:3px 8px;border-radius:2px;}
+.rb-bronze{background:rgba(204,0,0,.15);color:#FF4444;border:1px solid rgba(204,0,0,.3);}
+.rb-silver{background:rgba(180,180,180,.1);color:#C0C0C0;border:1px solid rgba(180,180,180,.3);}
+.rb-gold{background:rgba(201,162,39,.12);color:var(--gold);border:1px solid rgba(201,162,39,.3);}
+
+/* ALUR */
+.alur{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:22px;}
+.alur-item{background:#FFFFFF;border-top:4px solid var(--red);padding:16px 14px;text-align:center;box-shadow:0 2px 10px rgba(204,0,0,.08);}
+.alur-num{font-family:'Cinzel Decorative',serif;font-size:28px;color:rgba(204,0,0,.15);margin-bottom:5px;}
+.alur-icon{font-size:20px;margin-bottom:5px;}
+.alur-title{font-family:'Cinzel',serif;font-size:10px;color:#8B0000;font-weight:700;margin-bottom:3px;}
+.alur-desc{font-size:12px;color:#1A0000;line-height:1.55;}
+
+/* FORM */
+.fbox{background:rgba(204,0,0,.05);border:1px solid rgba(204,0,0,.2);padding:26px 24px;max-width:540px;margin:24px auto 0;}
+.frow{margin-bottom:12px;}
+.flbl{font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:2px;color:rgba(204,0,0,.6);text-transform:uppercase;display:block;margin-bottom:4px;}
+.finp,.fsel{width:100%;background:rgba(204,0,0,.06);border:1px solid rgba(204,0,0,.22);color:#FF4444;font-family:'EB Garamond',serif;font-size:15px;padding:9px 12px;outline:none;transition:border-color .2s;}
+.finp:focus,.fsel:focus{border-color:var(--red);}
+.finp::placeholder{color:rgba(204,0,0,.35);}
+.fsel option{background:#1A0000;color:#FF4444;}
+.modal-info{background:rgba(204,0,0,.1);border:1px solid rgba(204,0,0,.35);padding:12px 16px;margin-bottom:14px;}
+.mi-row{display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px;}
+.mi-v{color:#FF4444;font-weight:700;}
+.mi-v.gold{color:var(--gold);}
+.mi-v.green{color:#4ecb71;}
+.btn-wa{width:100%;font-family:'Cinzel',serif;font-size:12px;letter-spacing:3px;background:linear-gradient(135deg,#25d366,#128C7E);color:#fff;border:none;padding:14px;cursor:pointer;text-transform:uppercase;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;margin-bottom:8px;}
+.btn-wa:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,211,102,.3);}
+
+/* KARTU MEMBER */
+.ktabs{display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;}
+.ktab{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:rgba(204,0,0,.6);border:1px solid rgba(204,0,0,.25);background:rgba(204,0,0,.04);padding:7px 16px;cursor:pointer;text-transform:uppercase;transition:all .2s;}
+.ktab.active{color:#FF4444;border-color:rgba(204,0,0,.6);background:rgba(204,0,0,.12);}
+.kview{display:none;flex-direction:column;align-items:center;gap:12px;}
+.kview.active{display:flex;}
+.knote{font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;color:rgba(204,0,0,.5);text-transform:uppercase;text-align:center;}
+.kartu{width:min(340px,95vw);height:212px;background:#0A0000;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 8px 32px rgba(204,0,0,.3),0 0 0 2px rgba(204,0,0,.4);}
+.kc1r{position:absolute;border-radius:50%;border:1.5px solid rgba(204,0,0,.4);width:170px;height:170px;top:-75px;right:-55px;}
+.kc2r{position:absolute;border-radius:50%;border:1.5px solid rgba(204,0,0,.25);width:110px;height:110px;bottom:-45px;left:-35px;}
+.kflag{position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#CC0000 50%,#FFFFFF 50%);}
+.kb-r{position:absolute;inset:7px;border:1.5px solid rgba(204,0,0,.35);border-radius:5px;}
+.kcon{position:relative;z-index:10;padding:14px 15px 11px;height:100%;display:flex;flex-direction:column;justify-content:space-between;}
+.ktop{display:flex;justify-content:space-between;align-items:flex-start;}
+.kbn{font-family:'Cinzel Decorative',serif;font-size:8px;font-weight:700;color:var(--red);line-height:1.4;}
+.kbs{font-family:'Cinzel',serif;font-size:6px;letter-spacing:2px;color:rgba(204,0,0,.5);text-transform:uppercase;margin-top:2px;}
+.kbadge-r{font-family:'Cinzel',serif;font-size:6px;letter-spacing:1.5px;color:#FF4444;border:1px solid rgba(204,0,0,.4);padding:3px 6px;text-transform:uppercase;background:rgba(204,0,0,.1);}
+.kmid{display:flex;gap:10px;align-items:flex-end;}
+.kinfo{flex:1;}
+.kfl{font-family:'Cinzel',serif;font-size:6px;letter-spacing:1.5px;color:rgba(204,0,0,.5);text-transform:uppercase;}
+.kfv{font-family:'EB Garamond',serif;font-size:12px;color:rgba(255,200,200,.9);font-weight:600;line-height:1.2;}
+.kfield{margin-bottom:4px;}
+.kqr-r{width:54px;height:54px;flex-shrink:0;border:1px solid rgba(204,0,0,.35);background:#0A0000;}
+.kbot{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid rgba(204,0,0,.2);padding-top:6px;}
+.km-v{font-family:'Cinzel Decorative',serif;font-size:11px;font-weight:700;color:var(--red);}
+.km-l,.kno-l,.kp-l{font-family:'Cinzel',serif;font-size:6px;letter-spacing:1px;color:rgba(204,0,0,.5);text-transform:uppercase;}
+.kno-v{font-family:'Courier New',monospace;font-size:8px;color:#FF4444;letter-spacing:1px;}
+.kp-v{font-family:'EB Garamond',serif;font-size:11px;color:var(--gold);font-weight:600;}
+.kno-w{text-align:center;}.kp-w{text-align:right;}
+.kbtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+.kbtn{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;padding:10px 18px;border:none;cursor:pointer;text-transform:uppercase;transition:all .2s;}
+.kbtn-red{background:var(--red);color:#FFFFFF;}
+.kbtn-wa{background:linear-gradient(135deg,#25d366,#128C7E);color:#fff;}
+.kbtn:hover{opacity:.85;transform:translateY(-1px);}
+
+/* FOOTER */
+footer{background:#050000;border-top:1px solid rgba(204,0,0,.2);padding:28px 20px;text-align:center;}
+.fbrand{font-family:'Cinzel Decorative',serif;font-size:16px;color:var(--red);margin-bottom:4px;}
+.fsub{font-family:'Cinzel',serif;font-size:8px;letter-spacing:4px;color:rgba(204,0,0,.5);text-transform:uppercase;margin-bottom:10px;}
+.ftagline{font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;color:rgba(204,0,0,.3);text-transform:uppercase;}
+.wa-float{position:fixed;bottom:22px;right:18px;z-index:200;background:linear-gradient(135deg,#25d366,#128C7E);color:#fff;border:none;border-radius:50px;padding:11px 18px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;cursor:pointer;box-shadow:0 4px 20px rgba(37,211,102,.4);text-decoration:none;display:flex;align-items:center;gap:8px;text-transform:uppercase;transition:all .2s;}
+.wa-float:hover{transform:translateY(-2px);}
+
+@media(max-width:600px){
+  .nav-links .nav-btn:not(.cta){display:none;}
+  .split{grid-template-columns:1fr;}
+  .hero-stats{gap:8px;}
+  .bonus-section{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-flag"></div>
+  <div class="nav-inner">
+    <div>
+      <div class="nav-brand">GA-DN</div>
+      <div class="nav-sub">Gunung Artha Digital Network</div>
+    </div>
+    <div class="nav-links">
+      <a class="nav-btn" href="#produk">📦 Produk</a>
+      <a class="nav-btn" href="#bonus">💰 Bonus</a>
+      <a class="nav-btn" href="#downline">🌳 Downline</a>
+      <a class="nav-btn" href="#daftar">✍️ Daftar</a>
+      <a class="nav-btn" href="#admin" onclick="showAdmin()">⚙️ Admin</a>
+      <a class="nav-btn cta" href="https://wa.me/6283871666136" target="_blank">💬 WA Kami</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="cdeco" style="width:500px;height:500px;top:-200px;right:-150px;opacity:.28;"></div>
+  <div class="cdeco" style="width:340px;height:340px;bottom:-140px;left:-90px;opacity:.22;"></div>
+
+  <div class="ayat-banner">
+    <div class="ayat-arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ &nbsp;·&nbsp; وَتَعَاوَنُوا عَلَى الْبِرِّ وَالتَّقْوَىٰ</div>
+    <div class="ayat-latin">"Bismillahirrahmanirrahim — Wa ta'awanu 'alal birri wat taqwa"</div>
+    <div class="ayat-ref">QS. Al-Maidah : 2 &nbsp;·&nbsp; "Dan tolong-menolonglah kamu dalam kebaikan dan ketakwaan"</div>
+  </div>
+
+  <div class="hero-content">
+    <div style="display:flex;gap:0;width:70px;height:9px;margin:0 auto 16px;border:1px solid rgba(255,255,255,.2);">
+      <div style="flex:1;background:#CC0000;"></div>
+      <div style="flex:1;background:#FFFFFF;"></div>
+    </div>
+    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:5px;color:rgba(204,0,0,.6);text-transform:uppercase;margin-bottom:12px;">Komunitas Digital · Gunungguruh · Sukabumi · 2026</div>
+    <div class="hero-title">GA-DN</div>
+    <div style="font-family:'Cinzel Decorative',serif;font-size:clamp(13px,2.5vw,20px);color:rgba(255,200,200,.7);margin-bottom:8px;">Gunung Artha Digital Network</div>
+    <div class="hero-sub">Membership Digital · Matrix 2x∞ · Berkah Bersama</div>
+    <div class="divider" style="max-width:500px;margin:14px auto;"><div class="star"></div></div>
+    <div class="hero-desc">
+      Bergabung, belajar, dan berkembang bersama.<br>
+      <strong style="color:rgba(255,100,100,.9);">Akses konten digital premium</strong> sekaligus <strong style="color:rgba(255,100,100,.9);">bangun jaringan & raih bonus berlimpah</strong>.<br>
+      <span style="color:rgba(204,0,0,.6);font-size:13px;">Pertanian · Bisnis · Spiritual · Teknologi</span>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-v">2x∞</div><div class="hstat-l">Sistem Matrix</div></div>
+      <div class="hstat"><div class="hstat-v">3</div><div class="hstat-l">Jenis Bonus</div></div>
+      <div class="hstat"><div class="hstat-v">Rp 50rb</div><div class="hstat-l">Bonus Sponsor</div></div>
+      <div class="hstat"><div class="hstat-l">Mulai Dari</div><div class="hstat-v">150rb</div></div>
+    </div>
+  </div>
+
+  <!-- Split Cards -->
+  <div class="split" style="margin:0 auto;">
+    <div class="split-card member" onclick="document.getElementById('produk').scrollIntoView({behavior:'smooth'})">
+      <div class="sc-icon">🎓</div>
+      <div class="sc-tag">Jalur 1 — Konsumen</div>
+      <div class="sc-title">Beli & Nikmati</div>
+      <div class="sc-desc">Beli paket membership, nikmati akses konten digital premium tanpa perlu rekrut siapapun.</div>
+      <div class="sc-list">✅ Mulai Rp 150.000<br>✅ Akses materi pertanian digital<br>✅ E-course & video premium<br>✅ Komunitas KTSadar eksklusif<br>✅ Update konten setiap bulan</div>
+      <button class="btn-red">🎓 Lihat Paket Produk →</button>
+    </div>
+    <div class="split-card sponsor" onclick="document.getElementById('bonus').scrollIntoView({behavior:'smooth'})">
+      <div class="sc-icon">🌳</div>
+      <div class="sc-tag">Jalur 2 — Mitra Aktif</div>
+      <div class="sc-title">Bangun Jaringan</div>
+      <div class="sc-desc">Rekrut 2 orang, bangun matrix — raih bonus sponsor, bonus titik generasi, dan bonus reward!</div>
+      <div class="sc-list">✅ Bonus Sponsor Rp 50.000/orang<br>✅ Bonus Titik Rp 5.000/member/level<br>✅ Bonus Reward hadiah & upgrade<br>✅ Matrix 2 kaki unlimited level<br>✅ Potensi passive income halal</div>
+      <button class="btn-gold">🌳 Pelajari Sistem Bonus →</button>
+    </div>
+  </div>
+  <div class="flag-bar" style="margin-top:20px;"></div>
+</section>
+
+<!-- PRODUK -->
+<section id="produk" class="section-light">
+  <div class="ayat-banner">
+    <div class="ayat-arabic" style="font-size:14px;">اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ</div>
+    <div class="ayat-ref">QS. Al-Alaq : 1 &nbsp;·&nbsp; "Bacalah dengan nama Tuhanmu yang menciptakan"</div>
+  </div>
+  <div class="wrap">
+    <div class="sec-badge" style="margin-top:20px;">Paket Membership Digital</div>
+    <div class="sec-title red">Pilih Paket Yang Tepat</div>
+    <div style="font-size:15px;color:#1A0000;text-align:center;line-height:1.8;margin-bottom:4px;opacity:.9;">
+      Satu kali beli, akses seumur hidup.<br>
+      <strong style="color:#CC0000;">Konten terus bertambah, nilai terus meningkat.</strong>
+    </div>
+    <div class="divider"><div class="star"></div></div>
+
+    <div class="tier-grid">
+      <div class="tier-c t1">
+        <div class="tier-icon">🌱</div>
+        <div class="tier-name">STARTER</div>
+        <div class="tier-price">Rp 150.000</div>
+        <div class="tier-dl"></div>
+        <div class="tier-item">✅ <span>Akses Dasar</span></div>
+        <div class="tier-item">✅ <span>Materi Pertanian Digital</span></div>
+        <div class="tier-item">✅ <span>Grup Komunitas WA</span></div>
+        <div class="tier-item">✅ <span>E-book BTN (3 judul)</span></div>
+        <div class="tier-item">✅ <span>Bisa Rekrut & Bonus</span></div>
+      </div>
+      <div class="tier-c t2">
+        <div class="tier-icon">🌿</div>
+        <div class="tier-name">SILVER</div>
+        <div class="tier-price">Rp 300.000</div>
+        <div class="tier-dl"></div>
+        <div class="tier-item">✅ <span>Semua fitur Starter</span></div>
+        <div class="tier-item">✅ <span>E-course Video Premium</span></div>
+        <div class="tier-item">✅ <span>Template Bisnis Digital (10+)</span></div>
+        <div class="tier-item">✅ <span>Konsultasi 1x/bulan</span></div>
+        <div class="tier-item">✅ <span>Bonus Titik lebih besar</span></div>
+      </div>
+      <div class="tier-c t3">
+        <div class="tier-icon">🌳</div>
+        <div class="tier-name">GOLD</div>
+        <div class="tier-price">Rp 500.000</div>
+        <div class="tier-dl"></div>
+        <div class="tier-item">✅ <span>Semua fitur Silver</span></div>
+        <div class="tier-item">✅ <span>Akses SEMUA konten</span></div>
+        <div class="tier-item">✅ <span>Kelas Live Bulanan</span></div>
+        <div class="tier-item">✅ <span>Mentoring 1-on-1</span></div>
+        <div class="tier-item">✅ <span>Prioritas Bonus Reward</span></div>
+      </div>
+    </div>
+
+    <div class="feat-grid" style="margin-top:28px;">
+      <div class="feat-card-l"><div class="feat-icon">🌾</div><div class="feat-title-l">Konten Pertanian Digital</div><div class="feat-desc-l">Materi Al-Filaha, SIMPATAN, panduan NutraGro, teknik pertanian modern berbasis kearifan lokal.</div></div>
+      <div class="feat-card-l"><div class="feat-icon">💼</div><div class="feat-title-l">Modul Bisnis & UMKM</div><div class="feat-desc-l">Panduan membangun usaha, proposal bisnis, laporan keuangan sederhana, pemasaran digital.</div></div>
+      <div class="feat-card-l"><div class="feat-icon">🌙</div><div class="feat-title-l">Konten Spiritual & Tasawuf</div><div class="feat-desc-l">Materi pengembangan diri, e-book Melebur, kajian Islam, dzikir & muhasabah harian.</div></div>
+      <div class="feat-card-l"><div class="feat-icon">📱</div><div class="feat-title-l">Tools Digital & Template</div><div class="feat-desc-l">Template proposal, MoU, RAB, aplikasi manajemen sederhana, panduan media sosial bisnis.</div></div>
+    </div>
+
+    <!-- Alur Daftar -->
+    <div style="margin-top:30px;">
+      <div class="sec-badge">Cara Bergabung</div>
+      <div class="sec-title red" style="font-size:22px;">4 Langkah Mudah</div>
+      <div class="alur">
+        <div class="alur-item"><div class="alur-num">01</div><div class="alur-icon">📱</div><div class="alur-title">Pilih Paket</div><div class="alur-desc">Pilih paket Starter, Silver, atau Gold sesuai kebutuhan dan kemampuan</div></div>
+        <div class="alur-item"><div class="alur-num">02</div><div class="alur-icon">💳</div><div class="alur-title">Transfer & Konfirmasi</div><div class="alur-desc">Transfer ke rekening GA-DN, konfirmasi via WA dengan bukti transfer</div></div>
+        <div class="alur-item"><div class="alur-num">03</div><div class="alur-icon">🪪</div><div class="alur-title">Aktivasi Member</div><div class="alur-desc">Terima ID member, link referral, dan kartu member digital resmi GA-DN</div></div>
+        <div class="alur-item"><div class="alur-num">04</div><div class="alur-icon">🚀</div><div class="alur-title">Akses & Rekrut</div><div class="alur-desc">Nikmati semua konten dan mulai bangun jaringan untuk raih bonus</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="flag-bar" style="margin-top:40px;"></div>
+</section>
+
+<!-- BONUS & MATRIX -->
+<section id="bonus" class="section-dark">
+  <div class="ayat-banner">
+    <div class="ayat-arabic" style="font-size:14px;">وَأَنْ لَيْسَ لِلْإِنْسَانِ إِلَّا مَا سَعَىٰ</div>
+    <div class="ayat-ref">QS. An-Najm : 39 &nbsp;·&nbsp; "Dan bahwa manusia hanya memperoleh apa yang telah diusahakannya"</div>
+  </div>
+  <div class="wrap">
+    <div class="sec-badge" style="margin-top:20px;">Sistem Bonus</div>
+    <div class="sec-title white">3 Sumber Penghasilan</div>
+    <div style="font-size:15px;color:rgba(255,220,220,.88);text-align:center;line-height:1.8;margin-bottom:4px;">
+      Halal, transparan, dan <strong style="color:#FF4444;">berbasis prestasi nyata</strong>.
+    </div>
+    <div class="divider white"><div class="star white"></div></div>
+
+    <div class="bonus-section">
+      <div class="bonus-card bc-sponsor">
+        <div class="bc-icon">🤝</div>
+        <div class="bc-title">Bonus Sponsor</div>
+        <div class="bc-val">Rp 50.000</div>
+        <div class="bc-desc">Dapatkan Rp 50.000 setiap kali Anda berhasil mengajak 1 orang bergabung dan membayar paket apapun. Langsung cair ke saldo Anda.</div>
+      </div>
+      <div class="bonus-card bc-titik">
+        <div class="bc-icon">🌐</div>
+        <div class="bc-title">Bonus Titik / Generasi</div>
+        <div class="bc-val">Rp 5.000</div>
+        <div class="bc-desc">Rp 5.000 per member aktif di setiap level jaringan Anda — unlimited level ke bawah. Semakin dalam jaringan, semakin besar pasif income Anda.</div>
+      </div>
+      <div class="bonus-card bc-reward">
+        <div class="bc-icon">🏆</div>
+        <div class="bc-title">Bonus Reward</div>
+        <div class="bc-val">Hadiah</div>
+        <div class="bc-desc">Capai target jumlah downline aktif dan dapatkan reward spesial: upgrade paket gratis, uang tunai, hingga gadget. Semakin tinggi target, semakin besar hadiahnya.</div>
+      </div>
+    </div>
+
+    <!-- Reward Table -->
+    <div style="margin-top:30px;">
+      <div class="sec-badge">Tabel Reward</div>
+      <div class="sec-title white" style="font-size:22px;">Target & Hadiah</div>
+      <table class="reward-table">
+        <thead>
+          <tr>
+            <th>Peringkat</th>
+            <th>Target Downline Aktif</th>
+            <th>Reward</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="reward-badge rb-bronze">🥉 Mitra</span></td>
+            <td>10 member</td>
+            <td>Upgrade Paket Gratis</td>
+          </tr>
+          <tr>
+            <td><span class="reward-badge rb-silver">🥈 Pemimpin</span></td>
+            <td>25 member</td>
+            <td>Uang Tunai Rp 500.000</td>
+          </tr>
+          <tr>
+            <td><span class="reward-badge rb-gold">🥇 Direktur</span></td>
+            <td>50 member</td>
+            <td>Uang Tunai Rp 1.500.000</td>
+          </tr>
+          <tr>
+            <td><span class="reward-badge" style="background:rgba(229,197,255,.1);color:#E5C5FF;border:1px solid rgba(229,197,255,.3);">💎 Bintang</span></td>
+            <td>100 member</td>
+            <td>Gadget + Rp 5.000.000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Matrix Visual -->
+    <div class="matrix-wrap">
+      <div class="matrix-title">✦ Visualisasi Matrix 2x∞ ✦</div>
+      <div style="display:flex;flex-direction:column;align-items:center;">
+        <!-- Level 0: Anda -->
+        <div class="m-node root" style="margin-bottom:0;">
+          <div class="n-icon">👑</div>
+          <div>ANDA</div>
+        </div>
+        <div class="connector"></div>
+        <!-- L1 connector horizontal -->
+        <div style="width:200px;height:1px;background:rgba(204,0,0,.4);position:relative;">
+          <div style="position:absolute;left:0;top:0;width:1px;height:20px;background:rgba(204,0,0,.4);"></div>
+          <div style="position:absolute;right:0;top:0;width:1px;height:20px;background:rgba(204,0,0,.4);"></div>
+        </div>
+        <!-- Level 1 -->
+        <div style="display:flex;gap:60px;margin-top:20px;">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+            <div class="m-node l1"><div class="n-icon">👤</div><div>Kaki 1</div></div>
+            <div class="connector" style="height:16px;"></div>
+            <div style="width:100px;height:1px;background:rgba(204,0,0,.3);position:relative;">
+              <div style="position:absolute;left:0;top:0;width:1px;height:14px;background:rgba(204,0,0,.3);"></div>
+              <div style="position:absolute;right:0;top:0;width:1px;height:14px;background:rgba(204,0,0,.3);"></div>
+            </div>
+            <div style="display:flex;gap:10px;margin-top:14px;">
+              <div class="m-node l2" style="width:55px;height:55px;"><div style="font-size:14px;">👤</div><div style="font-size:6px;">L2</div></div>
+              <div class="m-node l2" style="width:55px;height:55px;"><div style="font-size:14px;">👤</div><div style="font-size:6px;">L2</div></div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+            <div class="m-node l1"><div class="n-icon">👤</div><div>Kaki 2</div></div>
+            <div class="connector" style="height:16px;"></div>
+            <div style="width:100px;height:1px;background:rgba(204,0,0,.3);position:relative;">
+              <div style="position:absolute;left:0;top:0;width:1px;height:14px;background:rgba(204,0,0,.3);"></div>
+              <div style="position:absolute;right:0;top:0;width:1px;height:14px;background:rgba(204,0,0,.3);"></div>
+            </div>
+            <div style="display:flex;gap:10px;margin-top:14px;">
+              <div class="m-node l2" style="width:55px;height:55px;"><div style="font-size:14px;">👤</div><div style="font-size:6px;">L2</div></div>
+              <div class="m-node l2" style="width:55px;height:55px;"><div style="font-size:14px;">👤</div><div style="font-size:6px;">L2</div></div>
+            </div>
+          </div>
+        </div>
+        <div style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;color:rgba(204,0,0,.5);text-transform:uppercase;margin-top:16px;text-align:center;">↓ &nbsp; Terus berkembang unlimited level ke bawah &nbsp; ↓</div>
+      </div>
+    </div>
+
+    <!-- Kalkulator Potensi -->
+    <div class="kalc" style="margin-top:30px;">
+      <div class="kalc-title">✦ Kalkulator Potensi Bonus ✦</div>
+      <div style="text-align:center;margin-bottom:12px;">
+        <div class="kalc-lbl" style="justify-content:center;margin-bottom:8px;"><span>Pilih Paket Anda:</span></div>
+        <div class="pkg-btns">
+          <button class="pkg-btn active" onclick="setPkg('starter',this)">🌱 Starter</button>
+          <button class="pkg-btn" onclick="setPkg('silver',this)">🌿 Silver</button>
+          <button class="pkg-btn" onclick="setPkg('gold',this)">🌳 Gold</button>
+        </div>
+      </div>
+      <div class="pkg-ind" id="pkg-ind">
+        <span style="font-size:20px;">🌱</span>
+        <span style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#FF4444;">PAKET STARTER — Rp 150.000</span>
+      </div>
+      <div class="kalc-lbl"><span>Jumlah Rekrutan Langsung (Level 1)</span><span id="rek-val">2 orang</span></div>
+      <input type="range" style="width:100%;-webkit-appearance:none;height:5px;background:rgba(204,0,0,.2);outline:none;border-radius:3px;" id="rek-slider" min="1" max="20" value="2" oninput="hitungBonus()">
+      <div class="kalc-res">
+        <div class="kr"><div class="kr-l">Bonus Sponsor</div><div class="kr-v" id="r-sponsor">Rp 100.000</div><div class="kr-s">dari rekrutan langsung</div></div>
+        <div class="kr"><div class="kr-l">Est. Bonus Titik/bln</div><div class="kr-v" id="r-titik">Rp 60.000</div><div class="kr-s">asumsi 2 level aktif</div></div>
+        <div class="kr"><div class="kr-l">Total Potensi/bln</div><div class="kr-v" id="r-total-bonus">Rp 160.000</div><div class="kr-s">sponsor + titik</div></div>
+        <div class="kr"><div class="kr-l">ROI Paket</div><div class="kr-v" id="r-roi">~107%</div><div class="kr-s">balik modal bulan 1</div></div>
+      </div>
+    </div>
+
+  </div>
+  <div class="flag-bar" style="margin-top:40px;"></div>
+</section>
+
+<!-- DAFTAR -->
+<section id="daftar" class="section-dark" style="background:linear-gradient(180deg,#0A0000,#150000,#0A0000);">
+  <div class="wrap">
+    <div class="sec-badge">Mulai Sekarang</div>
+    <div class="sec-title white">Daftar Member GA-DN</div>
+    <div style="font-size:15px;color:rgba(255,220,220,.88);text-align:center;line-height:1.8;margin-bottom:20px;">
+      Isi data di bawah, pilih paket, dan konfirmasi via WhatsApp.
+    </div>
+
+    <div class="fbox">
+      <div class="modal-info">
+        <div class="mi-row"><span>Paket Dipilih</span><span class="mi-v" id="fd-paket">🌱 Starter</span></div>
+        <div class="mi-row"><span>Harga</span><span class="mi-v gold" id="fd-harga">Rp 150.000</span></div>
+        <div class="mi-row"><span>Bonus Sponsor</span><span class="mi-v green">Rp 50.000/rekrutan</span></div>
+        <div class="mi-row"><span>Bonus Titik</span><span class="mi-v green">Rp 5.000/member/level</span></div>
+      </div>
+      <div class="frow">
+        <label class="flbl">Pilih Paket</label>
+        <select class="fsel" id="f-paket" onchange="updateFormPaket()">
+          <option value="Starter|150000">🌱 Starter — Rp 150.000</option>
+          <option value="Silver|300000">🌿 Silver — Rp 300.000</option>
+          <option value="Gold|500000">🌳 Gold — Rp 500.000</option>
+        </select>
+      </div>
+      <div class="frow"><label class="flbl">Nama Lengkap</label><input class="finp" id="f-nama" placeholder="Nama Anda..." oninput="updateKartuMember()"></div>
+      <div class="frow"><label class="flbl">Nomor WhatsApp</label><input class="finp" id="f-hp" placeholder="08xx-xxxx-xxxx" oninput="updateKartuMember()"></div>
+      <div class="frow"><label class="flbl">Kota / Kabupaten</label><input class="finp" id="f-kota" placeholder="Contoh: Sukabumi"></div>
+      <div class="frow"><label class="flbl">ID Sponsor (jika ada)</label><input class="finp" id="f-sponsor" placeholder="ID Upline / nama sponsor..."></div>
+      <button class="btn-wa" onclick="daftarMember()"><span style="font-size:18px;">💬</span>Daftar via WhatsApp</button>
+      <button class="btn-red" onclick="buatKartuMember()" style="margin-top:8px;">🪪 Buat Kartu Member Sementara</button>
+    </div>
+
+    <!-- Kartu Member -->
+    <div style="margin-top:30px;" id="kartu-section">
+      <div class="sec-badge">Kartu Member Digital</div>
+      <div class="sec-title white" style="font-size:22px;">Kartu Resmi GA-DN</div>
+      <div class="divider white"><div class="star white"></div></div>
+      <div class="ktabs">
+        <div class="ktab active" onclick="showKartu('kartu',this)">🪪 Kartu Member</div>
+        <div class="ktab" onclick="showKartu('struk',this)">🧾 Struk Konfirmasi</div>
+      </div>
+      <div class="kview active" id="kv-kartu">
+        <div class="knote">Format Kartu Member Digital 86×54mm</div>
+        <div class="kartu">
+          <div class="kc1r"></div><div class="kc2r"></div>
+          <div class="kflag"></div><div class="kb-r"></div>
+          <div class="kcon">
+            <div class="ktop">
+              <div><div class="kbn">GUNUNG ARTHA<br>DIGITAL NETWORK</div><div class="kbs">GA-DN · Membership Digital</div></div>
+              <div class="kbadge-r" id="km-paket">🌱 STARTER</div>
+            </div>
+            <div class="kmid">
+              <div class="kinfo">
+                <div class="kfield"><div class="kfl">Nama Member</div><div class="kfv" id="km-nama">___________________</div></div>
+                <div class="kfield"><div class="kfl">No WA</div><div class="kfv" id="km-hp" style="font-size:10px;color:rgba(204,0,0,.6);">___________________</div></div>
+                <div class="kfield"><div class="kfl">Bergabung</div><div class="kfv" id="km-tgl" style="font-size:10px;color:rgba(204,0,0,.6);">__ / __ / 2026</div></div>
+              </div>
+              <div class="kqr-r"><canvas id="qrC" width="52" height="52"></canvas></div>
+            </div>
+            <div class="kbot">
+              <div><div class="km-l">Paket</div><div class="km-v" id="km-harga">Rp 150.000</div></div>
+              <div class="kno-w"><div class="kno-v" id="km-id">GD-2026-001</div><div class="kno-l">ID Member</div></div>
+              <div class="kp-w"><div class="kp-v" id="km-bonus">Rp 50rb/rekrut</div><div class="kp-l">Bonus Sponsor</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="kbtns">
+          <button class="kbtn kbtn-red" onclick="window.print()">🖨️ Cetak Kartu</button>
+          <button class="kbtn kbtn-wa" onclick="kirimWAKartu()">💬 Kirim via WA</button>
+        </div>
+      </div>
+
+      <div class="kview" id="kv-struk">
+        <div class="knote">Format Struk 58mm · Bukti Pendaftaran</div>
+        <div style="width:216px;background:white;padding:10px 8px;font-family:'Courier New',monospace;font-size:11px;color:#000;box-shadow:0 2px 10px rgba(204,0,0,.2);margin:0 auto;">
+          <div style="text-align:center;font-size:13px;font-weight:bold;letter-spacing:1px;">GA-DN</div>
+          <div style="text-align:center;font-size:9px;">Gunung Artha Digital Network</div>
+          <div style="text-align:center;font-size:9px;">Gunungguruh · Sukabumi · Jabar</div>
+          <div style="border-top:3px double #000;margin:5px 0;"></div>
+          <div style="text-align:center;font-weight:bold;font-size:10px;">BUKTI PENDAFTARAN MEMBER</div>
+          <div style="border-top:1px dashed #000;margin:4px 0;"></div>
+          <div style="font-size:9px;">Nama :</div><div style="font-size:11px;font-weight:bold;min-height:16px;" id="s-nama-m">&nbsp;</div>
+          <div style="font-size:9px;">No WA :</div><div style="font-size:10px;min-height:16px;" id="s-hp-m">&nbsp;</div>
+          <div style="display:flex;justify-content:space-between;font-size:10px;margin:2px 0;"><span style="font-size:9px;">ID Member</span><span style="font-weight:bold;font-size:9px;" id="s-id-m">–</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:10px;margin:2px 0;"><span style="font-size:9px;">Paket</span><span style="font-weight:bold;font-size:9px;" id="s-paket-m">–</span></div>
+          <div style="border-top:1px dashed #000;margin:4px 0;"></div>
+          <div style="display:flex;justify-content:space-between;font-size:10px;margin:2px 0;"><span>Harga Paket</span><span style="font-weight:bold;" id="s-harga-m">–</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:10px;margin:2px 0;"><span>Bonus Sponsor</span><span style="font-weight:bold;">Rp 50.000/org</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:10px;margin:2px 0;"><span>Bonus Titik</span><span style="font-weight:bold;">Rp 5.000/lvl</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:10px;margin:2px 0;"><span>Bergabung</span><span id="s-tgl-m">–</span></div>
+          <div style="border-top:1px dashed #000;margin:4px 0;"></div>
+          <div style="text-align:center;font-weight:bold;font-size:10px;">Selamat Bergabung! 🎉</div>
+          <div style="text-align:center;font-size:9px;">Amanah · Barakah · Berkembang</div>
+          <div style="text-align:center;font-size:9px;">WA: 083871666136</div>
+          <div style="height:8px;"></div>
+        </div>
+        <div class="kbtns">
+          <button class="kbtn kbtn-red" onclick="window.print()">🖨️ Cetak Struk</button>
+          <button class="kbtn kbtn-wa" onclick="kirimWAKartu()">💬 Kirim via WA</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flag-bar" style="margin-top:40px;"></div>
+</section>
+
+<!-- PEMBAYARAN -->
+<section id="pembayaran" class="section-light">
+  <div class="wrap">
+    <div class="sec-badge" style="margin-top:10px;">Rekening Resmi</div>
+    <div class="sec-title red">Transfer & Pembayaran</div>
+    <div style="font-size:15px;color:#1A0000;text-align:center;line-height:1.8;margin-bottom:4px;opacity:.9;">
+      Transfer ke salah satu rekening di bawah, lalu konfirmasi via WA.
+    </div>
+    <div class="divider"><div class="star"></div></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:20px;">
+      <div class="feat-card-l" style="text-align:center;">
+        <div class="feat-icon">🏦</div>
+        <div class="feat-title-l">Bank BJB</div>
+        <div style="font-family:'Courier New',monospace;font-size:18px;color:#CC0000;font-weight:700;margin:6px 0;">0160405831100</div>
+        <div style="font-size:13px;color:#1A0000;">a.n. <strong>HUDRI</strong></div>
+        <button onclick="copyText('0160405831100','BJB')" style="margin-top:8px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;background:var(--red);color:#fff;border:none;padding:6px 16px;cursor:pointer;text-transform:uppercase;">📋 Salin Nomor</button>
+      </div>
+      <div class="feat-card-l" style="text-align:center;">
+        <div class="feat-icon">🏦</div>
+        <div class="feat-title-l">Bank Mandiri</div>
+        <div style="font-family:'Courier New',monospace;font-size:18px;color:#CC0000;font-weight:700;margin:6px 0;">1820016298168</div>
+        <div style="font-size:13px;color:#1A0000;">a.n. <strong>HUDRI</strong></div>
+        <button onclick="copyText('1820016298168','Mandiri')" style="margin-top:8px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;background:var(--red);color:#fff;border:none;padding:6px 16px;cursor:pointer;text-transform:uppercase;">📋 Salin Nomor</button>
+      </div>
+      <div class="feat-card-l" style="text-align:center;">
+        <div class="feat-icon">📱</div>
+        <div class="feat-title-l">Dompet Digital</div>
+        <div style="font-family:'Courier New',monospace;font-size:18px;color:#CC0000;font-weight:700;margin:6px 0;">083871666136</div>
+        <div style="font-size:13px;color:#1A0000;">GoPay · ShopeePay · OVO · LinkAja</div>
+        <div style="font-size:12px;color:#8B0000;margin-top:2px;">a.n. <strong>HUDRI</strong></div>
+        <button onclick="copyText('083871666136','E-Wallet')" style="margin-top:8px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;background:var(--red);color:#fff;border:none;padding:6px 16px;cursor:pointer;text-transform:uppercase;">📋 Salin Nomor</button>
+      </div>
+    </div>
+    <div style="background:rgba(204,0,0,.06);border:1px solid rgba(204,0,0,.2);padding:14px 18px;margin-top:16px;text-align:center;">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:rgba(204,0,0,.7);text-transform:uppercase;margin-bottom:6px;">⚠ Penting</div>
+      <div style="font-size:13px;color:#1A0000;line-height:1.8;">Setelah transfer, wajib konfirmasi via WA ke <strong>083871666136</strong><br>dengan mengirim: <em>Nama · Paket · Nominal · Bukti Transfer</em></div>
+      <button class="btn-wa" onclick="konfirmasiTransfer()" style="max-width:360px;margin:12px auto 0;display:flex;"><span style="font-size:18px;">💬</span>Konfirmasi Transfer via WA</button>
+    </div>
+  </div>
+  <div class="flag-bar" style="margin-top:40px;"></div>
+</section>
+
+<!-- POHON DOWNLINE INTERAKTIF -->
+<section id="downline" class="section-dark">
+  <div class="wrap">
+    <div class="sec-badge" style="margin-top:10px;">Jaringan Saya</div>
+    <div class="sec-title white">Pohon Downline Interaktif</div>
+    <div style="font-size:15px;color:rgba(255,220,220,.88);text-align:center;line-height:1.8;margin-bottom:16px;">
+      Masukkan ID Member Anda untuk melihat struktur jaringan.
+    </div>
+    <div class="divider white"><div class="star white"></div></div>
+
+    <!-- Input cari -->
+    <div style="display:flex;gap:8px;max-width:480px;margin:0 auto 20px;">
+      <input class="finp" id="dl-id" placeholder="Masukkan ID Member (contoh: GD-2026-001)" style="flex:1;">
+      <button class="btn-red" onclick="cariDownline()" style="white-space:nowrap;padding:9px 18px;">🔍 Cari</button>
+    </div>
+
+    <!-- Demo tree (sample data) -->
+    <div id="downline-tree" style="overflow-x:auto;padding:20px 0;">
+      <div style="text-align:center;color:rgba(255,220,220,.5);font-style:italic;font-size:14px;padding:30px;">
+        Masukkan ID Member dan klik Cari untuk melihat pohon downline Anda
+      </div>
+    </div>
+
+    <!-- Statistik downline -->
+    <div id="dl-stats" style="display:none;margin-top:20px;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;">
+        <div class="kr" style="background:rgba(204,0,0,.1);">
+          <div class="kr-l">Total Downline</div>
+          <div class="kr-v" id="stat-total">0</div>
+          <div class="kr-s">semua level</div>
+        </div>
+        <div class="kr" style="background:rgba(204,0,0,.1);">
+          <div class="kr-l">Level 1 (Langsung)</div>
+          <div class="kr-v" id="stat-l1">0</div>
+          <div class="kr-s">rekrutan Anda</div>
+        </div>
+        <div class="kr" style="background:rgba(204,0,0,.1);">
+          <div class="kr-l">Est. Bonus Titik</div>
+          <div class="kr-v" id="stat-bonus">Rp 0</div>
+          <div class="kr-s">bulan ini</div>
+        </div>
+        <div class="kr" style="background:rgba(204,0,0,.1);">
+          <div class="kr-l">Level Terdalam</div>
+          <div class="kr-v" id="stat-level">0</div>
+          <div class="kr-s">generasi aktif</div>
+        </div>
+      </div>
+      <button class="btn-wa" onclick="bagikanJaringan()" style="max-width:360px;margin:16px auto 0;display:flex;"><span style="font-size:18px;">💬</span>Bagikan Jaringan via WA</button>
+    </div>
+  </div>
+  <div class="flag-bar" style="margin-top:40px;"></div>
+</section>
+
+<!-- HALAMAN SPONSOR / REFERRAL -->
+<section id="sponsor" class="section-light">
+  <div class="wrap">
+    <div class="sec-badge" style="margin-top:10px;">Link Referral Personal</div>
+    <div class="sec-title red">Halaman Sponsor Anda</div>
+    <div style="font-size:15px;color:#1A0000;text-align:center;line-height:1.8;margin-bottom:16px;">
+      Generate link referral personal — setiap orang yang daftar via link Anda, langsung tercatat sebagai downline.
+    </div>
+    <div class="divider"><div class="star"></div></div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:600px;margin:20px auto 0;">
+      <div class="frow">
+        <label class="flbl">ID Member Anda</label>
+        <input class="finp" id="sp-id" placeholder="GD-2026-001" oninput="generateLink()">
+      </div>
+      <div class="frow">
+        <label class="flbl">Nama Anda</label>
+        <input class="finp" id="sp-nama" placeholder="Nama Lengkap" oninput="generateLink()">
+      </div>
+    </div>
+
+    <!-- Preview link -->
+    <div style="background:rgba(204,0,0,.06);border:1px solid rgba(204,0,0,.25);padding:16px;max-width:600px;margin:12px auto 0;">
+      <div style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;color:rgba(204,0,0,.6);text-transform:uppercase;margin-bottom:8px;">🔗 Link Referral Personal Anda</div>
+      <div id="ref-link" style="font-family:'Courier New',monospace;font-size:12px;color:#CC0000;word-break:break-all;background:rgba(0,0,0,.3);padding:8px;border-radius:2px;">https://gadn.netlify.app/?ref=GD-2026-001</div>
+      <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">
+        <button onclick="salinLink()" style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;background:var(--red);color:#fff;border:none;padding:8px 16px;cursor:pointer;text-transform:uppercase;flex:1;">📋 Salin Link</button>
+        <button onclick="bagikanWA()" style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;background:linear-gradient(135deg,#25d366,#128C7E);color:#fff;border:none;padding:8px 16px;cursor:pointer;text-transform:uppercase;flex:1;">💬 Bagikan WA</button>
+      </div>
+    </div>
+
+    <!-- Template pesan -->
+    <div style="margin-top:20px;max-width:600px;margin-left:auto;margin-right:auto;">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:rgba(204,0,0,.7);text-transform:uppercase;margin-bottom:10px;text-align:center;">📝 Template Pesan Rekrut</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <button onclick="kirimTemplatePendek()" class="feat-card-l" style="cursor:pointer;text-align:left;border:none;">
+          <div style="font-size:18px;margin-bottom:4px;">💬</div>
+          <div class="feat-title-l">Pesan Singkat</div>
+          <div style="font-size:12px;color:#444;line-height:1.5;">Cocok untuk WA personal, singkat dan to the point</div>
+        </button>
+        <button onclick="kirimTemplatePanjang()" class="feat-card-l" style="cursor:pointer;text-align:left;border:none;">
+          <div style="font-size:18px;margin-bottom:4px;">📜</div>
+          <div class="feat-title-l">Penjelasan Lengkap</div>
+          <div style="font-size:12px;color:#444;line-height:1.5;">Cocok untuk broadcast grup atau story WA</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Statistik sponsor -->
+    <div style="background:rgba(204,0,0,.06);border:1px solid rgba(204,0,0,.2);padding:16px;max-width:600px;margin:16px auto 0;">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:rgba(204,0,0,.6);text-transform:uppercase;margin-bottom:12px;text-align:center;">📊 Estimasi Penghasilan Sponsor</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;">
+        <div><div style="font-family:'Cinzel Decorative',serif;font-size:16px;color:#CC0000;">Rp 500rb</div><div style="font-family:'Cinzel',serif;font-size:7px;letter-spacing:1px;color:rgba(204,0,0,.5);text-transform:uppercase;">10 rekrutan</div></div>
+        <div><div style="font-family:'Cinzel Decorative',serif;font-size:16px;color:#C9A227;">Rp 1,25 Jt</div><div style="font-family:'Cinzel',serif;font-size:7px;letter-spacing:1px;color:rgba(204,0,0,.5);text-transform:uppercase;">25 rekrutan</div></div>
+        <div><div style="font-family:'Cinzel Decorative',serif;font-size:16px;color:#4ecb71;">Rp 2,5 Jt</div><div style="font-family:'Cinzel',serif;font-size:7px;letter-spacing:1px;color:rgba(204,0,0,.5);text-transform:uppercase;">50 rekrutan</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="flag-bar" style="margin-top:40px;"></div>
+</section>
+
+<!-- DASHBOARD ADMIN -->
+<section id="admin" class="section-dark" style="display:none;">
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
+      <div>
+        <div class="sec-badge" style="text-align:left;margin-bottom:4px;">Panel Admin</div>
+        <div class="sec-title white" style="text-align:left;font-size:22px;">Dashboard GA-DN</div>
+      </div>
+      <button onclick="tutupAdmin()" style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;background:rgba(204,0,0,.2);color:#FF4444;border:1px solid rgba(204,0,0,.4);padding:8px 16px;cursor:pointer;text-transform:uppercase;">✕ Tutup Admin</button>
+    </div>
+
+    <!-- Stats overview -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:24px;">
+      <div class="kr"><div class="kr-l">Total Member</div><div class="kr-v" id="adm-total">0</div><div class="kr-s">terdaftar</div></div>
+      <div class="kr"><div class="kr-l">Starter</div><div class="kr-v" id="adm-starter" style="color:#FF4444;">0</div><div class="kr-s">🌱 member</div></div>
+      <div class="kr"><div class="kr-l">Silver</div><div class="kr-v" id="adm-silver" style="color:#C0C0C0;">0</div><div class="kr-s">🌿 member</div></div>
+      <div class="kr"><div class="kr-l">Gold</div><div class="kr-v" id="adm-gold" style="color:#C9A227;">0</div><div class="kr-s">🌳 member</div></div>
+      <div class="kr"><div class="kr-l">Total Omzet</div><div class="kr-v" id="adm-omzet" style="font-size:13px;">Rp 0</div><div class="kr-s">pendaftar</div></div>
+      <div class="kr"><div class="kr-l">Est. Bonus Keluar</div><div class="kr-v" id="adm-bonus" style="font-size:13px;">Rp 0</div><div class="kr-s">sponsor+titik</div></div>
+    </div>
+
+    <!-- Form tambah member -->
+    <div style="background:rgba(204,0,0,.05);border:1px solid rgba(204,0,0,.2);padding:20px;margin-bottom:20px;">
+      <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:14px;">➕ Tambah Member Baru</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div><label class="flbl">Nama Lengkap</label><input class="finp" id="adm-nama" placeholder="Nama member..."></div>
+        <div><label class="flbl">No. WhatsApp</label><input class="finp" id="adm-hp" placeholder="08xx..."></div>
+        <div><label class="flbl">Kota</label><input class="finp" id="adm-kota" placeholder="Kota/Kabupaten"></div>
+        <div><label class="flbl">ID Sponsor</label><input class="finp" id="adm-sponsor" placeholder="ID Upline..."></div>
+        <div><label class="flbl">Paket</label>
+          <select class="fsel" id="adm-paket">
+            <option value="Starter|150000">🌱 Starter — Rp 150.000</option>
+            <option value="Silver|300000">🌿 Silver — Rp 300.000</option>
+            <option value="Gold|500000">🌳 Gold — Rp 500.000</option>
+          </select>
+        </div>
+        <div><label class="flbl">Status Bayar</label>
+          <select class="fsel" id="adm-bayar">
+            <option value="Lunas">✅ Lunas</option>
+            <option value="Pending">⏳ Pending</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:12px;">
+        <button onclick="tambahMember()" class="btn-red" style="flex:1;">➕ Tambah Member</button>
+        <button onclick="exportWA()" class="btn-wa" style="flex:1;margin:0;">💬 Export ke WA</button>
+      </div>
+    </div>
+
+    <!-- Tabel member -->
+    <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:10px;">📋 Daftar Member</div>
+    <div style="margin-bottom:10px;display:flex;gap:8px;flex-wrap:wrap;">
+      <input class="finp" id="adm-cari" placeholder="🔍 Cari nama / ID..." oninput="renderTabel()" style="flex:1;min-width:180px;">
+      <select class="fsel" id="adm-filter" onchange="renderTabel()" style="width:160px;">
+        <option value="">Semua Paket</option>
+        <option value="Starter">🌱 Starter</option>
+        <option value="Silver">🌿 Silver</option>
+        <option value="Gold">🌳 Gold</option>
+      </select>
+    </div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;">
+        <thead>
+          <tr>
+            <th style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:10px 8px;background:rgba(204,0,0,.15);color:rgba(255,150,150,.9);border-bottom:1px solid rgba(204,0,0,.3);text-align:left;">ID</th>
+            <th style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:10px 8px;background:rgba(204,0,0,.15);color:rgba(255,150,150,.9);border-bottom:1px solid rgba(204,0,0,.3);text-align:left;">Nama</th>
+            <th style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:10px 8px;background:rgba(204,0,0,.15);color:rgba(255,150,150,.9);border-bottom:1px solid rgba(204,0,0,.3);text-align:left;">WA</th>
+            <th style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:10px 8px;background:rgba(204,0,0,.15);color:rgba(255,150,150,.9);border-bottom:1px solid rgba(204,0,0,.3);text-align:left;">Paket</th>
+            <th style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:10px 8px;background:rgba(204,0,0,.15);color:rgba(255,150,150,.9);border-bottom:1px solid rgba(204,0,0,.3);text-align:left;">Sponsor</th>
+            <th style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:10px 8px;background:rgba(204,0,0,.15);color:rgba(255,150,150,.9);border-bottom:1px solid rgba(204,0,0,.3);text-align:left;">Bayar</th>
+            <th style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:10px 8px;background:rgba(204,0,0,.15);color:rgba(255,150,150,.9);border-bottom:1px solid rgba(204,0,0,.3);text-align:left;">Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="member-tbody">
+          <tr><td colspan="7" style="text-align:center;padding:20px;color:rgba(255,220,220,.4);font-style:italic;">Belum ada member. Tambahkan via form di atas.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+      <button onclick="exportCSV()" style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;background:rgba(204,0,0,.15);color:#FF4444;border:1px solid rgba(204,0,0,.3);padding:8px 16px;cursor:pointer;text-transform:uppercase;">📥 Export CSV</button>
+      <button onclick="hapusSemua()" style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;background:rgba(100,0,0,.3);color:#FF4444;border:1px solid rgba(100,0,0,.5);padding:8px 16px;cursor:pointer;text-transform:uppercase;">🗑 Reset Data</button>
+    </div>
+  </div>
+  <div class="flag-bar" style="margin-top:40px;"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fbrand">GA-DN · Gunung Artha Digital Network</div>
+  <div class="fsub">Komunitas Digital · Gunungguruh · Sukabumi · 2026</div>
+  <div class="divider" style="max-width:280px;margin:10px auto;"><div class="star"></div></div>
+  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:rgba(204,0,0,.4);margin-bottom:6px;">
+    BTN · KTSadar · Saung Starling · TAMARA · GA-I · SDS
+  </div>
+  <div class="flag-bar" style="max-width:120px;margin:10px auto;"></div>
+  <div class="ftagline" style="margin-top:8px;">✦ &nbsp; Amanah · Barakah · Berkembang Bersama &nbsp; ✦</div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/6283871666136?text=Halo%20GA-DN%2C%20saya%20tertarik%20bergabung%20sebagai%20member!" target="_blank">💬 Daftar GA-DN</a>
+
+<script>
+var WA = '6283871666136';
+var selPkg = {name:'Starter', icon:'🌱', harga:150000};
+
+var pkgData = {
+  starter: {name:'Starter', icon:'🌱', harga:150000, bonus_titik_mult:1},
+  silver:  {name:'Silver',  icon:'🌿', harga:300000, bonus_titik_mult:1.2},
+  gold:    {name:'Gold',    icon:'🌳', harga:500000, bonus_titik_mult:1.5}
+};
+
+function rp(n){return 'Rp '+Number(Math.round(n||0)).toLocaleString('id-ID');}
+
+// Kalkulator bonus
+function setPkg(key, el){
+  document.querySelectorAll('.pkg-btn').forEach(function(b){b.classList.remove('active');});
+  el.classList.add('active');
+  selPkg = pkgData[key];
+  document.getElementById('pkg-ind').innerHTML =
+    '<span style="font-size:20px;">'+selPkg.icon+'</span>' +
+    '<span style="font-family:\'Cinzel\',serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#FF4444;">PAKET '+selPkg.name.toUpperCase()+' — '+rp(selPkg.harga)+'</span>';
+  hitungBonus();
+}
+
+function hitungBonus(){
+  var rek = parseInt(document.getElementById('rek-slider').value);
+  document.getElementById('rek-val').textContent = rek + ' orang';
+  var bonusSponsor = rek * 50000;
+  var bonusTitik = rek * 2 * 5000 * selPkg.bonus_titik_mult; // asumsi masing2 rekrut 2
+  var total = bonusSponsor + bonusTitik;
+  var roi = ((total / selPkg.harga) * 100).toFixed(0);
+  document.getElementById('r-sponsor').textContent = rp(bonusSponsor);
+  document.getElementById('r-titik').textContent = rp(bonusTitik);
+  document.getElementById('r-total-bonus').textContent = rp(total);
+  document.getElementById('r-roi').textContent = '~'+roi+'%';
+}
+
+// Form & kartu member
+function updateFormPaket(){
+  var val = document.getElementById('f-paket').value.split('|');
+  var icons = {Starter:'🌱',Silver:'🌿',Gold:'🌳'};
+  document.getElementById('fd-paket').textContent = icons[val[0]] + ' ' + val[0];
+  document.getElementById('fd-harga').textContent = rp(parseInt(val[1]));
+  updateKartuMember();
+}
+
+function updateKartuMember(){
+  var nama = document.getElementById('f-nama').value.trim() || '___________________';
+  var hp = document.getElementById('f-hp').value.trim() || '___________________';
+  var val = document.getElementById('f-paket').value.split('|');
+  var icons = {Starter:'🌱',Silver:'🌿',Gold:'🌳'};
+  var d = new Date();
+  var tgl = d.toLocaleDateString('id-ID',{day:'2-digit',month:'2-digit',year:'numeric'});
+  var id = 'GD-2026-' + String(Math.floor(Math.random()*900)+100);
+
+  document.getElementById('km-nama').textContent = nama;
+  document.getElementById('km-hp').textContent = hp;
+  document.getElementById('km-tgl').textContent = tgl;
+  document.getElementById('km-paket').textContent = icons[val[0]] + ' ' + val[0].toUpperCase();
+  document.getElementById('km-harga').textContent = rp(parseInt(val[1]));
+  document.getElementById('km-id').textContent = id;
+  document.getElementById('km-bonus').textContent = 'Rp 50rb/rekrut';
+
+  // Struk
+  document.getElementById('s-nama-m').textContent = nama;
+  document.getElementById('s-hp-m').textContent = hp;
+  document.getElementById('s-id-m').textContent = id;
+  document.getElementById('s-paket-m').textContent = icons[val[0]] + ' ' + val[0];
+  document.getElementById('s-harga-m').textContent = rp(parseInt(val[1]));
+  document.getElementById('s-tgl-m').textContent = tgl;
+
+  drawQR(id+'|'+nama+'|'+val[0]+'|'+tgl);
+}
+
+function buatKartuMember(){
+  updateKartuMember();
+  document.getElementById('kartu-section').scrollIntoView({behavior:'smooth'});
+}
+
+function daftarMember(){
+  var nama = document.getElementById('f-nama').value.trim() || '(belum diisi)';
+  var hp = document.getElementById('f-hp').value.trim() || '(belum diisi)';
+  var kota = document.getElementById('f-kota').value.trim() || '(belum diisi)';
+  var sponsor = document.getElementById('f-sponsor').value.trim() || '-';
+  var val = document.getElementById('f-paket').value.split('|');
+  var icons = {Starter:'🌱',Silver:'🌿',Gold:'🌳'};
+  if(!document.getElementById('f-hp').value.trim()){alert('Isi nomor WA dulu!');return;}
+  var msg = 'Assalamualaikum GA-DN 🌿\n\n*بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ*\n\nSaya tertarik bergabung sebagai *Member GA-DN*!\n\n📋 *DATA PENDAFTARAN*\n▸ Nama      : '+nama+'\n▸ No WA     : '+hp+'\n▸ Kota      : '+kota+'\n▸ Sponsor   : '+sponsor+'\n\n📦 *PAKET DIPILIH*\n▸ Paket     : '+icons[val[0]]+' '+val[0]+'\n▸ Harga     : '+rp(parseInt(val[1]))+'\n\n💰 *BONUS SAYA*\n▸ Sponsor   : Rp 50.000/rekrutan\n▸ Titik     : Rp 5.000/member/level\n\nMohon konfirmasi & info rekening 🙏\n_Salam, '+nama+'_';
+  window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg),'_blank');
+}
+
+function kirimWAKartu(){
+  var nama = document.getElementById('km-nama').textContent;
+  var hp = document.getElementById('s-hp-m').textContent.replace(/^0/,'62').replace(/\D/g,'');
+  var id = document.getElementById('km-id').textContent;
+  var paket = document.getElementById('km-paket').textContent;
+  var harga = document.getElementById('km-harga').textContent;
+  var msg = 'Assalamualaikum '+nama+' 🌿\n\n*بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ*\n\n*Selamat bergabung di GA-DN!* 🎉\n\n🪪 *KARTU MEMBER DIGITAL*\n▸ ID Member  : '+id+'\n▸ Nama       : '+nama+'\n▸ Paket      : '+paket+'\n▸ Harga      : '+harga+'\n\n💰 *BONUS AKTIF*\n▸ Sponsor    : Rp 50.000/rekrutan\n▸ Titik      : Rp 5.000/member/level\n▸ Reward     : Mulai 10 member aktif\n\nYuk segera ajak 2 orang untuk mulai raih bonus! 🌳\n\nJazakumullah khairan 🙏\n_GA-DN · 083871666136_';
+  window.open('https://wa.me/'+(hp||WA)+'?text='+encodeURIComponent(msg),'_blank');
+}
+
+function showKartu(id, el){
+  document.querySelectorAll('.kview').forEach(function(v){v.classList.remove('active');});
+  document.querySelectorAll('.ktab').forEach(function(t){t.classList.remove('active');});
+  document.getElementById('kv-'+id).classList.add('active');
+  if(el) el.classList.add('active');
+}
+
+function drawQR(text){
+  var c = document.getElementById('qrC'); if(!c) return;
+  var ctx = c.getContext('2d');
+  ctx.fillStyle='#0A0000'; ctx.fillRect(0,0,52,52); ctx.fillStyle='#CC0000';
+  ctx.fillRect(2,2,13,13); ctx.fillStyle='#0A0000'; ctx.fillRect(4,4,9,9); ctx.fillStyle='#CC0000'; ctx.fillRect(6,6,5,5);
+  ctx.fillRect(37,2,13,13); ctx.fillStyle='#0A0000'; ctx.fillRect(39,4,9,9); ctx.fillStyle='#CC0000'; ctx.fillRect(41,6,5,5);
+  ctx.fillRect(2,37,13,13); ctx.fillStyle='#0A0000'; ctx.fillRect(4,39,9,9); ctx.fillStyle='#CC0000'; ctx.fillRect(6,41,5,5);
+  var h=5381; for(var j=0;j<text.length;j++) h=((h<<5)+h)+text.charCodeAt(j);
+  for(var r=0;r<8;r++) for(var cc=0;cc<8;cc++){if(!((h>>(r*8+cc))&1))continue;var x=18+cc*4,y=18+r*4;if(x>48||y>48)continue;ctx.fillRect(x,y,3,3);}
+}
+
+// ===== REKENING =====
+function copyText(text, label){
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){alert('✅ '+label+' '+text+' berhasil disalin!');});
+  } else {
+    var ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    alert('✅ '+label+' '+text+' berhasil disalin!');
+  }
+}
+
+function konfirmasiTransfer(){
+  var msg = 'Assalamualaikum GA-DN 🌿\n\n*بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ*\n\nSaya ingin konfirmasi transfer pembayaran pendaftaran Member GA-DN.\n\n📋 *DATA SAYA*\n▸ Nama    : \n▸ Paket   : \n▸ Nominal : \n▸ Via     : (BJB / Mandiri / GoPay / ShopeePay / OVO / LinkAja)\n\n[Lampirkan bukti transfer]\n\nMohon segera diproses 🙏';
+  window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg),'_blank');
+}
+
+// ===== POHON DOWNLINE =====
+// Data dummy untuk demo
+var demoData = {
+  'GD-2026-001': {nama:'HUDRI (Anda)', paket:'Gold', kota:'Sukabumi', downline:['GD-2026-002','GD-2026-003']},
+  'GD-2026-002': {nama:'Ahmad F.', paket:'Silver', kota:'Sukabumi', downline:['GD-2026-004','GD-2026-005']},
+  'GD-2026-003': {nama:'Siti R.', paket:'Starter', kota:'Bogor', downline:['GD-2026-006']},
+  'GD-2026-004': {nama:'Budi S.', paket:'Starter', kota:'Cianjur', downline:[]},
+  'GD-2026-005': {nama:'Dewi A.', paket:'Silver', kota:'Sukabumi', downline:[]},
+  'GD-2026-006': {nama:'Rini M.', paket:'Starter', kota:'Bogor', downline:[]}
+};
+
+var pkgColor = {Gold:'#C9A227', Silver:'#C0C0C0', Starter:'#FF4444'};
+var pkgIcon  = {Gold:'🌳', Silver:'🌿', Starter:'🌱'};
+
+function cariDownline(){
+  var id = document.getElementById('dl-id').value.trim().toUpperCase();
+  if(!id){ alert('Masukkan ID Member dulu!'); return; }
+
+  // Gunakan data dummy jika cocok, atau buat node tunggal
+  var db = demoData;
+  if(!db[id]){ db[id] = {nama:'Member '+id, paket:'Starter', kota:'-', downline:[]}; }
+
+  var html = renderNode(db, id, 0);
+  document.getElementById('downline-tree').innerHTML = '<div style="display:flex;justify-content:center;padding:10px 0;">'+html+'</div>';
+
+  // Hitung statistik
+  var all = getAllDownline(db, id);
+  var l1  = db[id].downline.length;
+  var bonus = all.length * 5000;
+  var maxLvl = getMaxLevel(db, id, 0);
+  document.getElementById('stat-total').textContent = all.length;
+  document.getElementById('stat-l1').textContent = l1;
+  document.getElementById('stat-bonus').textContent = rp(bonus);
+  document.getElementById('stat-level').textContent = maxLvl;
+  document.getElementById('dl-stats').style.display = 'block';
+}
+
+function renderNode(db, id, level){
+  if(!db[id]) return '';
+  var m = db[id];
+  var col = pkgColor[m.paket]||'#FF4444';
+  var ico = pkgIcon[m.paket]||'🌱';
+  var isRoot = level===0;
+  var nodeHtml = '<div style="display:flex;flex-direction:column;align-items:center;gap:0;">'
+    + '<div style="min-width:90px;padding:10px 8px;text-align:center;border:2px solid '+col+';background:'+(isRoot?'rgba(204,0,0,.2)':'rgba(10,0,0,.7)')+';border-radius:6px;position:relative;">'
+    + (isRoot?'<div style="position:absolute;top:-8px;left:50%;transform:translateX(-50%);font-family:\'Cinzel\',serif;font-size:7px;letter-spacing:1px;background:'+col+';color:#fff;padding:2px 6px;">ANDA</div>':'')
+    + '<div style="font-size:18px;">'+ico+'</div>'
+    + '<div style="font-family:\'Cinzel\',serif;font-size:8px;font-weight:700;color:'+col+';margin:2px 0;">'+m.nama+'</div>'
+    + '<div style="font-size:10px;color:rgba(255,220,220,.6);">'+id+'</div>'
+    + '<div style="font-size:10px;color:rgba(255,220,220,.5);">'+m.paket+'</div>'
+    + '</div>';
+
+  if(m.downline && m.downline.length > 0){
+    nodeHtml += '<div style="width:2px;height:20px;background:rgba(204,0,0,.4);"></div>'
+      + '<div style="display:flex;gap:12px;position:relative;">';
+    if(m.downline.length>1){
+      nodeHtml += '<div style="position:absolute;top:0;left:45px;right:45px;height:1px;background:rgba(204,0,0,.35);"></div>';
+    }
+    m.downline.forEach(function(did){
+      nodeHtml += '<div style="display:flex;flex-direction:column;align-items:center;">'
+        + '<div style="width:2px;height:20px;background:rgba(204,0,0,.35);"></div>'
+        + renderNode(db, did, level+1)
+        + '</div>';
+    });
+    nodeHtml += '</div>';
+  }
+  nodeHtml += '</div>';
+  return nodeHtml;
+}
+
+function getAllDownline(db, id){
+  var result=[];
+  if(!db[id]) return result;
+  db[id].downline.forEach(function(did){
+    result.push(did);
+    result = result.concat(getAllDownline(db, did));
+  });
+  return result;
+}
+
+function getMaxLevel(db, id, cur){
+  if(!db[id]||!db[id].downline.length) return cur;
+  return Math.max.apply(null, db[id].downline.map(function(did){ return getMaxLevel(db,did,cur+1); }));
+}
+
+function bagikanJaringan(){
+  var id = document.getElementById('dl-id').value.trim()||'GD-2026-001';
+  var total = document.getElementById('stat-total').textContent;
+  var bonus = document.getElementById('stat-bonus').textContent;
+  var msg = '🌳 *JARINGAN GA-DN SAYA* 🌳\n\n*بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ*\n\n▸ ID Saya    : '+id+'\n▸ Downline   : '+total+' member aktif\n▸ Est. Bonus : '+bonus+'/bulan\n\nMau ikut bergabung? 👇\nhttps://gadn.netlify.app/?ref='+id+'\n\n_GA-DN · Gunung Artha Digital Network_\n_083871666136_';
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+}
+
+// ===== HALAMAN SPONSOR =====
+function generateLink(){
+  var id = document.getElementById('sp-id').value.trim()||'GD-2026-001';
+  document.getElementById('ref-link').textContent = 'https://gadn.netlify.app/?ref='+id;
+}
+
+function salinLink(){
+  var link = document.getElementById('ref-link').textContent;
+  copyText(link,'Link referral');
+}
+
+function bagikanWA(){
+  var id = document.getElementById('sp-id').value.trim()||'GD-2026-001';
+  var nama = document.getElementById('sp-nama').value.trim()||'Saya';
+  kirimTemplatePanjang();
+}
+
+function kirimTemplatePendek(){
+  var id = document.getElementById('sp-id').value.trim()||'GD-2026-001';
+  var nama = document.getElementById('sp-nama').value.trim()||'Saya';
+  var msg = 'Assalamualaikum 🌿\n\nMau berbagi info bisnis digital yang bermanfaat nih!\n\n*GA-DN — Gunung Artha Digital Network*\n✅ Akses konten premium pertanian & bisnis\n✅ Bonus sponsor Rp 50.000/rekrutan\n✅ Bonus titik Rp 5.000/member/level\n✅ Mulai hanya Rp 150.000\n\nDaftar via link saya 👇\nhttps://gadn.netlify.app/?ref='+id+'\n\n_Salam, '+nama+' · '+id+'_';
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+}
+
+function kirimTemplatePanjang(){
+  var id = document.getElementById('sp-id').value.trim()||'GD-2026-001';
+  var nama = document.getElementById('sp-nama').value.trim()||'Saya';
+  var msg = 'Assalamualaikum Warahmatullahi Wabarakatuh 🌿\n\n*بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ*\n\nBoleh saya berbagi informasi bisnis digital yang insyaAllah halal dan bermanfaat?\n\n🌳 *GUNUNG ARTHA DIGITAL NETWORK (GA-DN)*\n\n📦 *APA ITU GA-DN?*\nKomunitas membership digital yang menggabungkan konten premium (pertanian, bisnis, spiritual) dengan sistem jaringan yang adil dan transparan.\n\n💰 *3 BONUS MENARIK*\n▸ Bonus Sponsor   : Rp 50.000/orang yang Anda ajak\n▸ Bonus Titik     : Rp 5.000/member/level (unlimited!)\n▸ Bonus Reward    : Hadiah mulai 10 downline aktif\n\n📦 *PAKET TERSEDIA*\n🌱 Starter : Rp 150.000\n🌿 Silver  : Rp 300.000\n🌳 Gold    : Rp 500.000\n\n✅ Dikelola oleh Bahula Tani Nusantara (BTN)\n✅ Legal & amanah\n✅ Sistem matrix 2x∞ yang mudah dipahami\n\n👇 *Daftar via link saya:*\nhttps://gadn.netlify.app/?ref='+id+'\n\n_Sponsor: '+nama+' · '+id+'_\n_Hubungi: 083871666136_\n\nJazakumullah khairan 🙏';
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+}
+
+// ===== DASHBOARD ADMIN =====
+var members = JSON.parse(localStorage.getItem('gadn_members')||'[]');
+var memberCounter = parseInt(localStorage.getItem('gadn_counter')||'1');
+
+function showAdmin(){
+  var pw = prompt('🔐 Password Admin:');
+  if(pw !== 'gadn2026'){
+    if(pw !== null) alert('❌ Password salah!');
+    return;
+  }
+  document.getElementById('admin').style.display = 'block';
+  document.getElementById('admin').scrollIntoView({behavior:'smooth'});
+  renderTabel();
+  updateStats();
+}
+
+function tutupAdmin(){
+  document.getElementById('admin').style.display = 'none';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function simpanData(){
+  localStorage.setItem('gadn_members', JSON.stringify(members));
+  localStorage.setItem('gadn_counter', memberCounter.toString());
+}
+
+function tambahMember(){
+  var nama = document.getElementById('adm-nama').value.trim();
+  var hp   = document.getElementById('adm-hp').value.trim();
+  if(!nama||!hp){ alert('Nama dan WA wajib diisi!'); return; }
+  var paketRaw = document.getElementById('adm-paket').value.split('|');
+  var kota  = document.getElementById('adm-kota').value.trim()||'-';
+  var sponsor = document.getElementById('adm-sponsor').value.trim()||'-';
+  var bayar = document.getElementById('adm-bayar').value;
+  var id = 'GD-2026-'+String(memberCounter).padStart(3,'0');
+  memberCounter++;
+  var tgl = new Date().toLocaleDateString('id-ID');
+  members.push({id:id, nama:nama, hp:hp, kota:kota, sponsor:sponsor, paket:paketRaw[0], harga:parseInt(paketRaw[1]), bayar:bayar, tgl:tgl});
+  simpanData();
+  renderTabel();
+  updateStats();
+  // Reset form
+  ['adm-nama','adm-hp','adm-kota','adm-sponsor'].forEach(function(x){document.getElementById(x).value='';});
+  alert('✅ Member '+nama+' ('+id+') berhasil ditambahkan!');
+}
+
+function hapusMember(idx){
+  if(!confirm('Hapus member '+members[idx].nama+'?')) return;
+  members.splice(idx,1);
+  simpanData();
+  renderTabel();
+  updateStats();
+}
+
+function renderTabel(){
+  var cari   = (document.getElementById('adm-cari')||{value:''}).value.toLowerCase();
+  var filter = (document.getElementById('adm-filter')||{value:''}).value;
+  var filtered = members.filter(function(m){
+    var matchCari = !cari || m.nama.toLowerCase().includes(cari) || m.id.toLowerCase().includes(cari);
+    var matchFilter = !filter || m.paket === filter;
+    return matchCari && matchFilter;
+  });
+  if(!filtered.length){
+    document.getElementById('member-tbody').innerHTML = '<tr><td colspan="7" style="text-align:center;padding:20px;color:rgba(255,220,220,.4);font-style:italic;">Tidak ada member ditemukan.</td></tr>';
+    return;
+  }
+  var cols = 'padding:9px 8px;border-bottom:1px solid rgba(204,0,0,.12);color:rgba(255,220,220,.85);';
+  var html = filtered.map(function(m, i){
+    var realIdx = members.indexOf(m);
+    var bayarBadge = m.bayar==='Lunas'
+      ? '<span style="background:rgba(78,203,113,.15);color:#4ecb71;border:1px solid rgba(78,203,113,.3);font-family:\'Cinzel\',serif;font-size:7px;letter-spacing:1px;padding:2px 6px;">✅ LUNAS</span>'
+      : '<span style="background:rgba(255,200,0,.1);color:#FFD700;border:1px solid rgba(255,200,0,.3);font-family:\'Cinzel\',serif;font-size:7px;letter-spacing:1px;padding:2px 6px;">⏳ PENDING</span>';
+    var pkgBadge = '<span style="color:'+pkgColor[m.paket]+';">'+pkgIcon[m.paket]+' '+m.paket+'</span>';
+    return '<tr>'
+      + '<td style="'+cols+'font-family:\'Courier New\',monospace;font-size:11px;color:#FF4444;">'+m.id+'</td>'
+      + '<td style="'+cols+'font-weight:600;">'+m.nama+'</td>'
+      + '<td style="'+cols+'"><a href="https://wa.me/'+m.hp.replace(/^0/,'62').replace(/\D/g,'')+'" target="_blank" style="color:#25d366;text-decoration:none;">'+m.hp+'</a></td>'
+      + '<td style="'+cols+'">'+pkgBadge+'<br><small style="color:rgba(204,0,0,.5);font-size:10px;">'+rp(m.harga)+'</small></td>'
+      + '<td style="'+cols+'font-size:11px;color:rgba(255,220,220,.6);">'+m.sponsor+'</td>'
+      + '<td style="'+cols+'">'+bayarBadge+'</td>'
+      + '<td style="'+cols+'">'
+      + '<button onclick="kirimKartuAdmin('+realIdx+')" style="font-size:10px;background:rgba(37,211,102,.15);color:#25d366;border:1px solid rgba(37,211,102,.3);padding:4px 8px;cursor:pointer;margin-bottom:4px;width:100%;">💬 WA</button>'
+      + '<button onclick="hapusMember('+realIdx+')" style="font-size:10px;background:rgba(204,0,0,.1);color:#FF4444;border:1px solid rgba(204,0,0,.3);padding:4px 8px;cursor:pointer;width:100%;">🗑</button>'
+      + '</td>'
+      + '</tr>';
+  }).join('');
+  document.getElementById('member-tbody').innerHTML = html;
+}
+
+function updateStats(){
+  var total = members.length;
+  var starter = members.filter(function(m){return m.paket==='Starter';}).length;
+  var silver  = members.filter(function(m){return m.paket==='Silver';}).length;
+  var gold    = members.filter(function(m){return m.paket==='Gold';}).length;
+  var omzet   = members.reduce(function(a,m){return a+m.harga;},0);
+  var bonusKeluar = total * 50000 + total * 5000;
+  document.getElementById('adm-total').textContent = total;
+  document.getElementById('adm-starter').textContent = starter;
+  document.getElementById('adm-silver').textContent = silver;
+  document.getElementById('adm-gold').textContent = gold;
+  document.getElementById('adm-omzet').textContent = rp(omzet);
+  document.getElementById('adm-bonus').textContent = rp(bonusKeluar);
+}
+
+function kirimKartuAdmin(idx){
+  var m = members[idx];
+  var hp = m.hp.replace(/^0/,'62').replace(/\D/g,'');
+  var msg = 'Assalamualaikum '+m.nama+' 🌿\n\n*بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ*\n\n*Selamat bergabung di GA-DN!* 🎉\n\n🪪 *KARTU MEMBER DIGITAL*\n▸ ID Member  : '+m.id+'\n▸ Nama       : '+m.nama+'\n▸ Paket      : '+pkgIcon[m.paket]+' '+m.paket+'\n▸ Harga      : '+rp(m.harga)+'\n▸ Bergabung  : '+m.tgl+'\n\n💰 *BONUS AKTIF*\n▸ Sponsor    : Rp 50.000/rekrutan\n▸ Titik      : Rp 5.000/member/level\n▸ Reward     : Mulai 10 downline aktif\n\n🔗 *LINK REFERRAL ANDA*\nhttps://gadn.netlify.app/?ref='+m.id+'\n\nYuk segera ajak 2 orang & mulai raih bonus! 🌳\n\nJazakumullah khairan 🙏\n_GA-DN · 083871666136_';
+  window.open('https://wa.me/'+hp+'?text='+encodeURIComponent(msg),'_blank');
+}
+
+function exportWA(){
+  if(!members.length){ alert('Belum ada data member!'); return; }
+  var tgl = new Date().toLocaleDateString('id-ID');
+  var omzet = members.reduce(function(a,m){return a+m.harga;},0);
+  var list = members.map(function(m,i){
+    return (i+1)+'. '+m.nama+' · '+m.id+' · '+pkgIcon[m.paket]+m.paket+' · '+m.bayar;
+  }).join('\n');
+  var msg = '📊 *LAPORAN MEMBER GA-DN*\n📅 '+tgl+'\n\n▸ Total Member : '+members.length+'\n▸ Total Omzet  : '+rp(omzet)+'\n\n📋 *DAFTAR MEMBER*\n'+list+'\n\n_GA-DN · Gunung Artha Digital Network_';
+  window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg),'_blank');
+}
+
+function exportCSV(){
+  if(!members.length){ alert('Belum ada data!'); return; }
+  var header = 'ID,Nama,WA,Kota,Paket,Harga,Sponsor,Status Bayar,Tanggal';
+  var rows = members.map(function(m){
+    return [m.id,m.nama,m.hp,m.kota,m.paket,m.harga,m.sponsor,m.bayar,m.tgl].join(',');
+  });
+  var csv = [header].concat(rows).join('\n');
+  var blob = new Blob([csv], {type:'text/csv'});
+  var url  = URL.createObjectURL(blob);
+  var a = document.createElement('a'); a.href=url; a.download='gadn-member-'+Date.now()+'.csv';
+  a.click(); URL.revokeObjectURL(url);
+}
+
+function hapusSemua(){
+  if(!confirm('⚠️ HAPUS SEMUA DATA? Ini tidak bisa dibatalkan!')) return;
+  members = []; memberCounter = 1; simpanData(); renderTabel(); updateStats();
+  alert('Data berhasil dihapus.');
+}
+
+window.onload = function(){
+  hitungBonus();
+  updateFormPaket();
+  drawQR('GD-2026-001|Member GA-DN|Starter');
+  generateLink();
+  // Cek referral dari URL
+  var params = new URLSearchParams(window.location.search);
+  var ref = params.get('ref');
+  if(ref){
+    document.getElementById('f-sponsor').value = ref;
+    document.getElementById('sp-id').value = ref;
+    generateLink();
+  }
+};
+</script>
+</body>
+</html>
