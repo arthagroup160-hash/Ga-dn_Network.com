@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Produk & Paket – GA-DN</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:#0A0000;font-family:'EB Garamond',serif;color:#fff;overflow-x:hidden;padding-top:52px;padding-bottom:68px;}
+.nav-top{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,0,0,.97);border-bottom:1px solid rgba(204,0,0,.35);height:52px;display:flex;align-items:stretch;}
+.nav-flag{width:7px;background:linear-gradient(180deg,#CC0000 50%,#fff 50%);flex-shrink:0;}
+.nav-inner{flex:1;display:flex;justify-content:space-between;align-items:center;padding:0 16px;}
+.nav-brand{font-family:'Cinzel Decorative',serif;font-size:16px;color:#CC0000;}
+.nav-sub{font-family:'Cinzel',serif;font-size:6px;letter-spacing:3px;color:rgba(204,0,0,.5);text-transform:uppercase;}
+.nav-wa{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;background:linear-gradient(135deg,#25d366,#128C7E);color:#fff;border:none;border-radius:3px;padding:7px 12px;cursor:pointer;text-transform:uppercase;text-decoration:none;}
+.nav-bot{position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(5,0,0,.98);border-top:1px solid rgba(204,0,0,.3);display:flex;height:62px;}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;color:rgba(204,0,0,.4);transition:all .2s;}
+.nb.active,.nb:hover{color:#FF4444;background:rgba(204,0,0,.07);}
+.nb-ic{font-size:20px;line-height:1;}
+.nb-lb{font-family:'Cinzel',serif;font-size:6.5px;letter-spacing:1.5px;text-transform:uppercase;}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px;}
+.ayat{background:linear-gradient(135deg,#8B0000,#CC0000,#8B0000);padding:10px 18px;text-align:center;}
+.ayat-ar{font-family:'EB Garamond',serif;font-size:14px;color:#fff;letter-spacing:1.5px;line-height:1.7;direction:rtl;}
+.ayat-ref{font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;color:rgba(255,200,200,.75);text-transform:uppercase;margin-top:3px;}
+.sec{padding:32px 0;}
+.sec.light{background:linear-gradient(180deg,#FFF5F5,#fff,#FFF5F5);}
+.sec.dark{background:#0A0000;}
+.badge{font-family:'Cinzel',serif;font-size:8px;letter-spacing:5px;color:rgba(204,0,0,.7);text-transform:uppercase;text-align:center;margin-bottom:8px;}
+.title{font-family:'Cinzel Decorative',serif;font-size:clamp(18px,4vw,26px);font-weight:700;text-align:center;line-height:1.25;margin-bottom:6px;}
+.title.red{color:#CC0000;}.title.white{color:#fff;}
+.divider{display:flex;align-items:center;gap:10px;margin:12px 0;}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,#CC0000,transparent);}
+.star{width:7px;height:7px;background:#CC0000;transform:rotate(45deg);}
+.flag-bar{height:5px;background:linear-gradient(90deg,#CC0000 50%,#fff 50%);}
+
+/* TIER */
+.tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:20px;}
+.tier{padding:20px 16px;text-align:center;position:relative;border:2px solid;cursor:pointer;transition:all .25s;}
+.tier::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.tier.t1{border-color:rgba(204,0,0,.4);background:linear-gradient(160deg,rgba(204,0,0,.08),rgba(10,0,0,.8));}
+.tier.t1::before{background:#CC0000;}
+.tier.t2{border-color:rgba(180,180,180,.35);background:linear-gradient(160deg,rgba(180,180,180,.07),rgba(10,0,0,.8));}
+.tier.t2::before{background:#C0C0C0;}
+.tier.t3{border-color:rgba(201,162,39,.4);background:linear-gradient(160deg,rgba(201,162,39,.1),rgba(10,0,0,.8));}
+.tier.t3::before{background:#C9A227;}
+.tier:hover{transform:translateY(-4px);}
+.tier-icon{font-size:28px;margin-bottom:8px;}
+.tier-name{font-family:'Cinzel',serif;font-size:13px;font-weight:700;margin-bottom:4px;}
+.t1 .tier-name{color:#FF4444;}.t2 .tier-name{color:#C0C0C0;}.t3 .tier-name{color:#C9A227;}
+.tier-price{font-family:'Cinzel Decorative',serif;font-size:22px;font-weight:900;margin-bottom:8px;}
+.t1 .tier-price{color:#FF4444;}.t2 .tier-price{color:#C0C0C0;}.t3 .tier-price{color:#C9A227;}
+.tier-dl{height:1px;background:linear-gradient(90deg,transparent,rgba(204,0,0,.3),transparent);margin:8px 0;}
+.tier-item{font-size:13px;color:rgba(255,220,220,.85);margin-bottom:4px;text-align:left;padding:0 4px;}
+.tier-item span{font-weight:700;}
+.t1 .tier-item span{color:#FF4444;}.t2 .tier-item span{color:#C0C0C0;}.t3 .tier-item span{color:#C9A227;}
+.tier-btn{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;border:none;padding:11px 16px;cursor:pointer;text-transform:uppercase;font-weight:700;width:100%;margin-top:12px;}
+.t1 .tier-btn{background:#CC0000;color:#fff;}
+.t2 .tier-btn{background:#C0C0C0;color:#0A0000;}
+.t3 .tier-btn{background:#C9A227;color:#0A0000;}
+
+/* KONTEN GRID */
+.konten-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:18px;}
+.kcard{background:#fff;border-left:4px solid #CC0000;border:1px solid rgba(204,0,0,.12);border-left:4px solid #CC0000;padding:16px 14px;box-shadow:0 2px 8px rgba(204,0,0,.07);}
+.kcard-icon{font-size:20px;margin-bottom:6px;}
+.kcard-title{font-family:'Cinzel',serif;font-size:11px;color:#8B0000;font-weight:700;margin-bottom:4px;}
+.kcard-desc{font-size:13px;color:#1A0000;line-height:1.6;}
+
+/* ALUR */
+.alur-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:18px;}
+.alur-item{background:#fff;border-top:4px solid #CC0000;padding:16px 12px;text-align:center;box-shadow:0 2px 8px rgba(204,0,0,.08);}
+.alur-num{font-family:'Cinzel Decorative',serif;font-size:30px;color:rgba(204,0,0,.12);margin-bottom:4px;}
+.alur-icon{font-size:20px;margin-bottom:4px;}
+.alur-title{font-family:'Cinzel',serif;font-size:10px;color:#8B0000;font-weight:700;margin-bottom:3px;}
+.alur-desc{font-size:12px;color:#1A0000;line-height:1.5;}
+
+/* REKENING */
+.rek-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:18px;}
+.rek-card{background:#fff;border:1px solid rgba(204,0,0,.15);border-top:4px solid #CC0000;padding:18px 16px;text-align:center;box-shadow:0 2px 10px rgba(204,0,0,.08);}
+.rek-icon{font-size:24px;margin-bottom:6px;}
+.rek-name{font-family:'Cinzel',serif;font-size:11px;color:#8B0000;font-weight:700;margin-bottom:6px;}
+.rek-num{font-family:'Courier New',monospace;font-size:17px;color:#CC0000;font-weight:700;margin-bottom:4px;letter-spacing:1px;}
+.rek-an{font-size:13px;color:#1A0000;margin-bottom:10px;}
+.rek-logos{font-size:12px;color:#444;margin-bottom:8px;}
+.btn-salin{font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;background:#CC0000;color:#fff;border:none;padding:8px 16px;cursor:pointer;text-transform:uppercase;width:100%;}
+.info-box{background:rgba(204,0,0,.06);border:1px solid rgba(204,0,0,.2);padding:14px 18px;margin-top:16px;text-align:center;}
+.btn-wa{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;background:linear-gradient(135deg,#25d366,#128C7E);color:#fff;border:none;padding:13px 20px;cursor:pointer;text-transform:uppercase;font-weight:700;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;}
+.btn-red{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;background:#CC0000;color:#fff;border:none;padding:13px 20px;cursor:pointer;text-transform:uppercase;font-weight:700;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px;}
+</style>
+</head>
+<body>
+
+<nav class="nav-top">
+  <div class="nav-flag"></div>
+  <div class="nav-inner">
+    <div><div class="nav-brand">GA-DN</div><div class="nav-sub">Produk & Paket</div></div>
+    <a class="nav-wa" href="https://wa.me/6283871666136" target="_blank">💬 WA</a>
+  </div>
+</nav>
+
+<div class="ayat">
+  <div class="ayat-ar">اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ</div>
+  <div class="ayat-ref">QS. Al-Alaq : 1 — "Bacalah dengan nama Tuhanmu yang menciptakan"</div>
+</div>
+
+<!-- PAKET -->
+<div class="sec dark">
+  <div class="wrap">
+    <div class="badge">Paket Membership Digital</div>
+    <div class="title white">Pilih Paket Anda</div>
+    <p style="font-size:14px;color:rgba(255,220,220,.8);text-align:center;line-height:1.8;margin-bottom:4px;">Satu kali beli, akses seumur hidup. Konten terus bertambah.</p>
+    <div class="divider"><div class="star"></div></div>
+    <div class="tier-grid">
+      <div class="tier t1">
+        <div class="tier-icon">🌱</div>
+        <div class="tier-name">STARTER</div>
+        <div class="tier-price">Rp 150.000</div>
+        <div class="tier-dl"></div>
+        <div class="tier-item">✅ <span>Akses Materi Dasar</span></div>
+        <div class="tier-item">✅ <span>E-book BTN (3 judul)</span></div>
+        <div class="tier-item">✅ <span>Grup Komunitas WA</span></div>
+        <div class="tier-item">✅ <span>Bonus Sponsor & Titik</span></div>
+        <div class="tier-item">✅ <span>Kartu Member Digital</span></div>
+        <button class="tier-btn" onclick="pilihPaket('Starter','150000')">Pilih Starter →</button>
+      </div>
+      <div class="tier t2">
+        <div class="tier-icon">🌿</div>
+        <div class="tier-name">SILVER</div>
+        <div class="tier-price">Rp 300.000</div>
+        <div class="tier-dl"></div>
+        <div class="tier-item">✅ <span>Semua fitur Starter</span></div>
+        <div class="tier-item">✅ <span>E-course Video Premium</span></div>
+        <div class="tier-item">✅ <span>Template Bisnis 10+</span></div>
+        <div class="tier-item">✅ <span>Konsultasi 1x/bulan</span></div>
+        <div class="tier-item">✅ <span>Bonus Titik lebih besar</span></div>
+        <button class="tier-btn" onclick="pilihPaket('Silver','300000')">Pilih Silver →</button>
+      </div>
+      <div class="tier t3">
+        <div class="tier-icon">🌳</div>
+        <div class="tier-name">GOLD</div>
+        <div class="tier-price">Rp 500.000</div>
+        <div class="tier-dl"></div>
+        <div class="tier-item">✅ <span>Semua fitur Silver</span></div>
+        <div class="tier-item">✅ <span>Akses SEMUA konten</span></div>
+        <div class="tier-item">✅ <span>Kelas Live Bulanan</span></div>
+        <div class="tier-item">✅ <span>Mentoring 1-on-1</span></div>
+        <div class="tier-item">✅ <span>Prioritas Bonus Reward</span></div>
+        <button class="tier-btn" onclick="pilihPaket('Gold','500000')">Pilih Gold →</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="flag-bar"></div>
+
+<!-- KONTEN -->
+<div class="sec light">
+  <div class="wrap">
+    <div class="badge" style="color:rgba(204,0,0,.7);">Isi Konten Digital</div>
+    <div class="title red">Apa Yang Anda Dapatkan</div>
+    <div class="divider"><div class="star"></div></div>
+    <div class="konten-grid">
+      <div class="kcard"><div class="kcard-icon">🌾</div><div class="kcard-title">Pertanian Digital</div><div class="kcard-desc">Materi Al-Filaha, SIMPATAN, panduan NutraGro, teknik pertanian modern berbasis kearifan lokal BTN.</div></div>
+      <div class="kcard"><div class="kcard-icon">💼</div><div class="kcard-title">Bisnis & UMKM</div><div class="kcard-desc">Panduan membangun usaha, proposal bisnis, laporan keuangan sederhana, pemasaran digital.</div></div>
+      <div class="kcard"><div class="kcard-icon">🌙</div><div class="kcard-title">Spiritual & Tasawuf</div><div class="kcard-desc">Pengembangan diri, e-book Melebur, kajian Islam, dzikir & muhasabah harian.</div></div>
+      <div class="kcard"><div class="kcard-icon">📱</div><div class="kcard-title">Tools & Template</div><div class="kcard-desc">Template proposal, MoU, RAB, panduan media sosial bisnis, tools manajemen sederhana.</div></div>
+    </div>
+
+    <!-- ALUR -->
+    <div style="margin-top:28px;">
+      <div class="badge" style="color:rgba(204,0,0,.7);">Cara Bergabung</div>
+      <div class="title red" style="font-size:20px;">4 Langkah Mudah</div>
+      <div class="alur-grid">
+        <div class="alur-item"><div class="alur-num">01</div><div class="alur-icon">📱</div><div class="alur-title">Pilih Paket</div><div class="alur-desc">Starter, Silver, atau Gold sesuai kebutuhan Anda</div></div>
+        <div class="alur-item"><div class="alur-num">02</div><div class="alur-icon">💳</div><div class="alur-title">Transfer</div><div class="alur-desc">Transfer ke rekening GA-DN, simpan bukti bayar</div></div>
+        <div class="alur-item"><div class="alur-num">03</div><div class="alur-icon">💬</div><div class="alur-title">Konfirmasi WA</div><div class="alur-desc">Kirim nama, paket, & bukti transfer ke WA kami</div></div>
+        <div class="alur-item"><div class="alur-num">04</div><div class="alur-icon">🚀</div><div class="alur-title">Aktif & Nikmati</div><div class="alur-desc">Terima ID member, kartu digital, & akses konten</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="flag-bar" style="margin-top:32px;"></div>
+</div>
+
+<!-- REKENING -->
+<div class="sec dark" id="rekening">
+  <div class="wrap">
+    <div class="badge">Rekening Resmi</div>
+    <div class="title white">Transfer & Pembayaran</div>
+    <p style="font-size:14px;color:rgba(255,220,220,.8);text-align:center;line-height:1.8;margin-bottom:4px;">Transfer ke salah satu rekening di bawah, lalu konfirmasi via WA.</p>
+    <div class="divider" style="--c:#fff;"><div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,#fff,transparent);"></div><div class="star" style="background:#fff;"></div><div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,#fff,transparent);"></div></div>
+    <div class="rek-grid">
+      <div class="rek-card">
+        <div class="rek-icon">🏦</div>
+        <div class="rek-name">Bank BJB</div>
+        <div class="rek-num">0160405831100</div>
+        <div class="rek-an">a.n. <strong>HUDRI</strong></div>
+        <button class="btn-salin" onclick="salin('0160405831100','No. BJB')">📋 Salin Nomor</button>
+      </div>
+      <div class="rek-card">
+        <div class="rek-icon">🏦</div>
+        <div class="rek-name">Bank Mandiri</div>
+        <div class="rek-num">1820016298168</div>
+        <div class="rek-an">a.n. <strong>HUDRI</strong></div>
+        <button class="btn-salin" onclick="salin('1820016298168','No. Mandiri')">📋 Salin Nomor</button>
+      </div>
+      <div class="rek-card">
+        <div class="rek-icon">📱</div>
+        <div class="rek-name">Dompet Digital</div>
+        <div class="rek-num">083871666136</div>
+        <div class="rek-logos">GoPay · ShopeePay · OVO · LinkAja</div>
+        <div class="rek-an">a.n. <strong>HUDRI</strong></div>
+        <button class="btn-salin" onclick="salin('083871666136','No. E-Wallet')">📋 Salin Nomor</button>
+      </div>
+    </div>
+    <div class="info-box">
+      <div style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;color:rgba(204,0,0,.7);text-transform:uppercase;margin-bottom:8px;">⚠ Wajib Konfirmasi</div>
+      <div style="font-size:13px;color:rgba(255,220,220,.85);line-height:1.8;">Setelah transfer, kirim ke WA <strong style="color:#FF4444;">083871666136</strong><br><em>Nama · Paket · Nominal · Bukti Transfer</em></div>
+      <button class="btn-wa" onclick="konfirmasiTransfer()"><span style="font-size:16px;">💬</span>Konfirmasi Transfer via WA</button>
+      <button class="btn-red" onclick="location.href='daftar.html'"><span style="font-size:16px;">✍️</span>Isi Form Pendaftaran</button>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-bot">
+  <a href="index.html" class="nb"><div class="nb-ic">🏠</div><div class="nb-lb">Beranda</div></a>
+  <a href="produk.html" class="nb active"><div class="nb-ic">📦</div><div class="nb-lb">Produk</div></a>
+  <a href="bonus.html" class="nb"><div class="nb-ic">💰</div><div class="nb-lb">Bonus</div></a>
+  <a href="daftar.html" class="nb"><div class="nb-ic">✍️</div><div class="nb-lb">Daftar</div></a>
+  <a href="downline.html" class="nb"><div class="nb-ic">🌳</div><div class="nb-lb">Jaringan</div></a>
+  <a href="admin.html" class="nb"><div class="nb-ic">⚙️</div><div class="nb-lb">Admin</div></a>
+</nav>
+
+<script>
+function salin(text, label){
+  if(navigator.clipboard){navigator.clipboard.writeText(text).then(function(){alert('✅ '+label+' '+text+' disalin!')});}
+  else{var t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);alert('✅ '+label+' disalin!');}
+}
+function pilihPaket(nama, harga){
+  localStorage.setItem('gadn_pilih_paket', nama+'|'+harga);
+  location.href='daftar.html';
+}
+function konfirmasiTransfer(){
+  var msg='Assalamualaikum GA-DN 🌿\n\n*بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ*\n\nSaya ingin konfirmasi transfer pendaftaran Member GA-DN.\n\n📋 *DATA SAYA*\n▸ Nama    : \n▸ Paket   : \n▸ Nominal : \n▸ Via     : (BJB / Mandiri / GoPay / ShopeePay / OVO / LinkAja)\n\n[Lampirkan bukti transfer]\n\nMohon segera diproses 🙏';
+  window.open('https://wa.me/6283871666136?text='+encodeURIComponent(msg),'_blank');
+}
+</script>
+</body>
+</html>
