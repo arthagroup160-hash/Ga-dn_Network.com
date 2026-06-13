@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sistem Bonus – GA-DN</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:#0A0000;font-family:'EB Garamond',serif;color:#fff;overflow-x:hidden;padding-top:52px;padding-bottom:68px;}
+.nav-top{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,0,0,.97);border-bottom:1px solid rgba(204,0,0,.35);height:52px;display:flex;align-items:stretch;}
+.nav-flag{width:7px;background:linear-gradient(180deg,#CC0000 50%,#fff 50%);flex-shrink:0;}
+.nav-inner{flex:1;display:flex;justify-content:space-between;align-items:center;padding:0 16px;}
+.nav-brand{font-family:'Cinzel Decorative',serif;font-size:16px;color:#CC0000;}
+.nav-sub{font-family:'Cinzel',serif;font-size:6px;letter-spacing:3px;color:rgba(204,0,0,.5);text-transform:uppercase;}
+.nav-wa{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;background:linear-gradient(135deg,#25d366,#128C7E);color:#fff;border:none;border-radius:3px;padding:7px 12px;cursor:pointer;text-transform:uppercase;text-decoration:none;}
+.nav-bot{position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(5,0,0,.98);border-top:1px solid rgba(204,0,0,.3);display:flex;height:62px;}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;color:rgba(204,0,0,.4);transition:all .2s;}
+.nb.active,.nb:hover{color:#FF4444;background:rgba(204,0,0,.07);}
+.nb-ic{font-size:20px;line-height:1;}.nb-lb{font-family:'Cinzel',serif;font-size:6.5px;letter-spacing:1.5px;text-transform:uppercase;}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px;}
+.ayat{background:linear-gradient(135deg,#8B0000,#CC0000,#8B0000);padding:10px 18px;text-align:center;}
+.ayat-ar{font-family:'EB Garamond',serif;font-size:14px;color:#fff;letter-spacing:1.5px;line-height:1.7;direction:rtl;}
+.ayat-ref{font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;color:rgba(255,200,200,.75);text-transform:uppercase;margin-top:3px;}
+.sec{padding:32px 0;}
+.badge{font-family:'Cinzel',serif;font-size:8px;letter-spacing:5px;color:rgba(204,0,0,.7);text-transform:uppercase;text-align:center;margin-bottom:8px;}
+.badge.w{color:rgba(255,255,255,.6);}
+.title{font-family:'Cinzel Decorative',serif;font-size:clamp(18px,4vw,26px);font-weight:700;text-align:center;line-height:1.25;margin-bottom:6px;}
+.title.red{color:#CC0000;}.title.white{color:#fff;}
+.divider{display:flex;align-items:center;gap:10px;margin:12px 0;}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,#CC0000,transparent);}
+.divider.w::before,.divider.w::after{background:linear-gradient(90deg,transparent,#fff,transparent);}
+.star{width:7px;height:7px;background:#CC0000;transform:rotate(45deg);}
+.star.w{background:#fff;}
+.flag-bar{height:5px;background:linear-gradient(90deg,#CC0000 50%,#fff 50%);}
+
+/* BONUS CARDS */
+.bonus-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:18px;}
+.bc{border:1px solid;padding:20px 18px;position:relative;}
+.bc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.bc-red{border-color:rgba(204,0,0,.4);background:linear-gradient(160deg,rgba(204,0,0,.07),rgba(10,0,0,.8));}
+.bc-red::before{background:#CC0000;}
+.bc-gold{border-color:rgba(201,162,39,.35);background:linear-gradient(160deg,rgba(201,162,39,.07),rgba(10,0,0,.8));}
+.bc-gold::before{background:#C9A227;}
+.bc-green{border-color:rgba(78,203,113,.3);background:linear-gradient(160deg,rgba(78,203,113,.06),rgba(10,0,0,.8));}
+.bc-green::before{background:#4ecb71;}
+.bc-header{display:flex;align-items:center;gap:14px;margin-bottom:12px;}
+.bc-icon{font-size:32px;}
+.bc-meta{}
+.bc-title{font-family:'Cinzel',serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;}
+.bc-red .bc-title{color:#FF4444;}.bc-gold .bc-title{color:#C9A227;}.bc-green .bc-title{color:#4ecb71;}
+.bc-val{font-family:'Cinzel Decorative',serif;font-size:26px;font-weight:900;}
+.bc-red .bc-val{color:#FF4444;}.bc-gold .bc-val{color:#C9A227;}.bc-green .bc-val{color:#4ecb71;}
+.bc-desc{font-size:14px;color:rgba(255,220,220,.85);line-height:1.75;}
+
+/* REWARD TABLE */
+.rtable{width:100%;border-collapse:collapse;margin-top:18px;font-size:13px;}
+.rtable th{font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:2px;text-transform:uppercase;padding:10px 10px;background:rgba(204,0,0,.15);color:rgba(255,150,150,.9);border-bottom:1px solid rgba(204,0,0,.3);}
+.rtable td{padding:10px 10px;border-bottom:1px solid rgba(204,0,0,.1);color:rgba(255,220,220,.85);text-align:center;}
+.rtable tr:nth-child(even) td{background:rgba(204,0,0,.03);}
+.rbadge{font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:1px;padding:3px 9px;border-radius:2px;}
+.rb1{background:rgba(204,0,0,.15);color:#FF4444;border:1px solid rgba(204,0,0,.3);}
+.rb2{background:rgba(180,180,180,.1);color:#C0C0C0;border:1px solid rgba(180,180,180,.3);}
+.rb3{background:rgba(201,162,39,.12);color:#C9A227;border:1px solid rgba(201,162,39,.3);}
+.rb4{background:rgba(229,197,255,.08);color:#E5C5FF;border:1px solid rgba(229,197,255,.25);}
+
+/* MATRIX VISUAL */
+.matrix-box{background:rgba(204,0,0,.04);border:1px solid rgba(204,0,0,.2);padding:24px 16px;margin-top:18px;text-align:center;}
+.m-node{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;border-radius:50%;border:2px solid;}
+.mn-root{width:76px;height:76px;background:linear-gradient(135deg,#CC0000,#8B0000);border-color:#FF4444;box-shadow:0 0 20px rgba(204,0,0,.4);}
+.mn-l1{width:62px;height:62px;background:rgba(204,0,0,.15);border-color:rgba(204,0,0,.5);}
+.mn-l2{width:50px;height:50px;background:rgba(204,0,0,.06);border-color:rgba(204,0,0,.25);border-style:dashed;}
+.mn-icon{font-size:20px;line-height:1;}
+.mn-lbl{font-family:'Cinzel',serif;font-size:6.5px;letter-spacing:1px;text-transform:uppercase;margin-top:3px;}
+.mn-root .mn-lbl{color:#fff;}.mn-l1 .mn-lbl{color:rgba(255,150,150,.9);}.mn-l2 .mn-lbl{color:rgba(204,0,0,.5);}
+.conn-v{width:2px;height:20px;background:rgba(204,0,0,.4);margin:0 auto;}
+.conn-h{height:1px;background:rgba(204,0,0,.35);}
+.row-nodes{display:flex;justify-content:center;gap:10px;}
+
+/* KALKULATOR */
+.kalc{background:rgba(204,0,0,.05);border:1px solid rgba(204,0,0,.2);padding:22px 18px;margin-top:18px;}
+.kalc-title{font-family:'Cinzel',serif;font-size:9px;letter-spacing:4px;color:#CC0000;text-transform:uppercase;text-align:center;margin-bottom:16px;}
+.pkg-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;}
+.pb{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;padding:9px 18px;border:1px solid rgba(204,0,0,.3);background:rgba(204,0,0,.05);color:rgba(204,0,0,.7);cursor:pointer;text-transform:uppercase;transition:all .2s;}
+.pb.active{background:#CC0000;color:#fff;border-color:#8B0000;}
+.sldr-row{margin-bottom:14px;}
+.sldr-lbl{font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;color:rgba(204,0,0,.6);text-transform:uppercase;display:flex;justify-content:space-between;margin-bottom:5px;}
+.sldr-lbl span{color:rgba(255,150,150,.9);}
+input[type=range]{width:100%;-webkit-appearance:none;height:5px;background:rgba(204,0,0,.2);outline:none;border-radius:3px;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;background:#CC0000;border-radius:50%;cursor:pointer;}
+.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px;}
+.rbox{background:rgba(204,0,0,.08);border:1px solid rgba(204,0,0,.2);padding:13px 10px;text-align:center;position:relative;}
+.rbox::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#CC0000,transparent);}
+.rl{font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;color:rgba(204,0,0,.6);text-transform:uppercase;margin-bottom:5px;}
+.rv{font-family:'Cinzel Decorative',serif;font-size:16px;color:#CC0000;}
+.rs{font-size:10px;color:rgba(204,0,0,.5);font-style:italic;margin-top:2px;}
+.btn-daftar{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;background:#CC0000;color:#fff;border:none;padding:13px 20px;cursor:pointer;text-transform:uppercase;font-weight:700;width:100%;margin-top:16px;display:flex;align-items:center;justify-content:center;gap:8px;}
+</style>
+</head>
+<body>
+
+<nav class="nav-top">
+  <div class="nav-flag"></div>
+  <div class="nav-inner">
+    <div><div class="nav-brand">GA-DN</div><div class="nav-sub">Sistem Bonus</div></div>
+    <a class="nav-wa" href="https://wa.me/6283871666136" target="_blank">💬 WA</a>
+  </div>
+</nav>
+
+<div class="ayat">
+  <div class="ayat-ar">وَأَنْ لَيْسَ لِلْإِنْسَانِ إِلَّا مَا سَعَىٰ</div>
+  <div class="ayat-ref">QS. An-Najm : 39 — "Manusia hanya memperoleh apa yang telah diusahakannya"</div>
+</div>
+
+<!-- 3 BONUS -->
+<div class="sec">
+  <div class="wrap">
+    <div class="badge w">3 Sumber Penghasilan</div>
+    <div class="title white">Sistem Bonus GA-DN</div>
+    <p style="font-size:14px;color:rgba(255,220,220,.8);text-align:center;line-height:1.8;margin-bottom:4px;">Halal, transparan, berbasis prestasi nyata.</p>
+    <div class="divider w"><div class="star w"></div></div>
+    <div class="bonus-grid">
+      <div class="bc bc-red">
+        <div class="bc-header">
+          <div class="bc-icon">🤝</div>
+          <div class="bc-meta">
+            <div class="bc-title">Bonus Sponsor</div>
+            <div class="bc-val">Rp 50.000</div>
+          </div>
+        </div>
+        <div class="bc-desc">Dapatkan <strong style="color:#FF4444;">Rp 50.000</strong> setiap kali Anda berhasil mengajak 1 orang bergabung dan membayar paket apapun. Langsung masuk saldo Anda — tidak perlu menunggu.</div>
+      </div>
+      <div class="bc bc-gold">
+        <div class="bc-header">
+          <div class="bc-icon">🌐</div>
+          <div class="bc-meta">
+            <div class="bc-title">Bonus Titik / Generasi</div>
+            <div class="bc-val">Rp 5.000</div>
+          </div>
+        </div>
+        <div class="bc-desc"><strong style="color:#C9A227;">Rp 5.000</strong> per member aktif di setiap level jaringan Anda — <strong style="color:#C9A227;">unlimited level ke bawah</strong>. Semakin dalam dan luas jaringan, semakin besar pasif income bulanan Anda.</div>
+      </div>
+      <div class="bc bc-green">
+        <div class="bc-header">
+          <div class="bc-icon">🏆</div>
+          <div class="bc-meta">
+            <div class="bc-title">Bonus Reward</div>
+            <div class="bc-val">Hadiah Spesial</div>
+          </div>
+        </div>
+        <div class="bc-desc">Capai target jumlah downline aktif dan raih reward eksklusif — dari upgrade paket gratis, uang tunai, hingga gadget. Semakin tinggi pencapaian, semakin besar hadiahnya.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="flag-bar"></div>
+
+<!-- REWARD TABLE -->
+<div class="sec" style="background:linear-gradient(180deg,#0A0000,#150000,#0A0000);">
+  <div class="wrap">
+    <div class="badge w">Tabel Pencapaian</div>
+    <div class="title white">Target & Reward</div>
+    <div class="divider w"><div class="star w"></div></div>
+    <table class="rtable">
+      <thead>
+        <tr><th>Peringkat</th><th>Target Downline</th><th>Reward</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="rbadge rb1">🥉 Mitra</span></td><td>10 member aktif</td><td>Upgrade Paket Gratis</td></tr>
+        <tr><td><span class="rbadge rb2">🥈 Pemimpin</span></td><td>25 member aktif</td><td>Uang Tunai Rp 500.000</td></tr>
+        <tr><td><span class="rbadge rb3">🥇 Direktur</span></td><td>50 member aktif</td><td>Uang Tunai Rp 1.500.000</td></tr>
+        <tr><td><span class="rbadge rb4">💎 Bintang</span></td><td>100 member aktif</td><td>Gadget + Rp 5.000.000</td></tr>
+      </tbody>
+    </table>
+
+    <!-- MATRIX VISUAL -->
+    <div style="margin-top:28px;">
+      <div class="badge w">Visualisasi Jaringan</div>
+      <div class="title white" style="font-size:20px;">Sistem Matrix 2x∞</div>
+      <div class="matrix-box">
+        <div class="m-node mn-root" style="margin:0 auto 0;">
+          <div class="mn-icon">👑</div><div class="mn-lbl">Anda</div>
+        </div>
+        <div class="conn-v"></div>
+        <div style="width:180px;margin:0 auto;position:relative;">
+          <div class="conn-h"></div>
+          <div style="position:absolute;left:0;top:0;width:2px;height:18px;background:rgba(204,0,0,.4);"></div>
+          <div style="position:absolute;right:0;top:0;width:2px;height:18px;background:rgba(204,0,0,.4);"></div>
+        </div>
+        <div class="row-nodes" style="margin-top:18px;">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+            <div class="m-node mn-l1"><div class="mn-icon">👤</div><div class="mn-lbl">Kaki 1</div></div>
+            <div class="conn-v" style="height:14px;background:rgba(204,0,0,.3);"></div>
+            <div style="width:90px;position:relative;"><div class="conn-h" style="background:rgba(204,0,0,.25);"></div><div style="position:absolute;left:0;top:0;width:2px;height:14px;background:rgba(204,0,0,.25);"></div><div style="position:absolute;right:0;top:0;width:2px;height:14px;background:rgba(204,0,0,.25);"></div></div>
+            <div class="row-nodes" style="margin-top:14px;gap:8px;">
+              <div class="m-node mn-l2"><div style="font-size:14px;">👤</div><div class="mn-lbl">L2</div></div>
+              <div class="m-node mn-l2"><div style="font-size:14px;">👤</div><div class="mn-lbl">L2</div></div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+            <div class="m-node mn-l1"><div class="mn-icon">👤</div><div class="mn-lbl">Kaki 2</div></div>
+            <div class="conn-v" style="height:14px;background:rgba(204,0,0,.3);"></div>
+            <div style="width:90px;position:relative;"><div class="conn-h" style="background:rgba(204,0,0,.25);"></div><div style="position:absolute;left:0;top:0;width:2px;height:14px;background:rgba(204,0,0,.25);"></div><div style="position:absolute;right:0;top:0;width:2px;height:14px;background:rgba(204,0,0,.25);"></div></div>
+            <div class="row-nodes" style="margin-top:14px;gap:8px;">
+              <div class="m-node mn-l2"><div style="font-size:14px;">👤</div><div class="mn-lbl">L2</div></div>
+              <div class="m-node mn-l2"><div style="font-size:14px;">👤</div><div class="mn-lbl">L2</div></div>
+            </div>
+          </div>
+        </div>
+        <div style="font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:2px;color:rgba(204,0,0,.5);text-transform:uppercase;margin-top:16px;">↓ Terus berkembang unlimited level ke bawah ↓</div>
+      </div>
+    </div>
+
+    <!-- KALKULATOR -->
+    <div class="kalc">
+      <div class="kalc-title">✦ Kalkulator Potensi Bonus ✦</div>
+      <div class="pkg-btns">
+        <button class="pb active" onclick="setPkg('starter',this)">🌱 Starter</button>
+        <button class="pb" onclick="setPkg('silver',this)">🌿 Silver</button>
+        <button class="pb" onclick="setPkg('gold',this)">🌳 Gold</button>
+      </div>
+      <div id="pkg-info" style="text-align:center;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:#FF4444;text-transform:uppercase;margin-bottom:14px;padding:8px;background:rgba(204,0,0,.06);border:1px solid rgba(204,0,0,.2);">
+        🌱 STARTER — Rp 150.000
+      </div>
+      <div class="sldr-row">
+        <div class="sldr-lbl"><span>Rekrutan Langsung (Level 1)</span><span id="rek-v">2 orang</span></div>
+        <input type="range" id="rek-sl" min="1" max="30" value="2" oninput="hitung()">
+      </div>
+      <div class="res-grid">
+        <div class="rbox"><div class="rl">Bonus Sponsor</div><div class="rv" id="r-sp">Rp 100.000</div><div class="rs">dari rekrutan</div></div>
+        <div class="rbox"><div class="rl">Bonus Titik/bln</div><div class="rv" id="r-tt">Rp 60.000</div><div class="rs">est. 2 level</div></div>
+        <div class="rbox"><div class="rl">Total Potensi</div><div class="rv" id="r-tot">Rp 160.000</div><div class="rs">per bulan</div></div>
+        <div class="rbox"><div class="rl">ROI Paket</div><div class="rv" id="r-roi">~107%</div><div class="rs">balik modal</div></div>
+      </div>
+      <button class="btn-daftar" onclick="location.href='daftar.html'">✍️ Daftar Sekarang & Mulai Raih Bonus</button>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-bot">
+  <a href="index.html" class="nb"><div class="nb-ic">🏠</div><div class="nb-lb">Beranda</div></a>
+  <a href="produk.html" class="nb"><div class="nb-ic">📦</div><div class="nb-lb">Produk</div></a>
+  <a href="bonus.html" class="nb active"><div class="nb-ic">💰</div><div class="nb-lb">Bonus</div></a>
+  <a href="daftar.html" class="nb"><div class="nb-ic">✍️</div><div class="nb-lb">Daftar</div></a>
+  <a href="downline.html" class="nb"><div class="nb-ic">🌳</div><div class="nb-lb">Jaringan</div></a>
+  <a href="admin.html" class="nb"><div class="nb-ic">⚙️</div><div class="nb-lb">Admin</div></a>
+</nav>
+
+<script>
+var pkgData={starter:{name:'Starter',icon:'🌱',harga:150000,mult:1},silver:{name:'Silver',icon:'🌿',harga:300000,mult:1.2},gold:{name:'Gold',icon:'🌳',harga:500000,mult:1.5}};
+var selPkg=pkgData.starter;
+function rp(n){return 'Rp '+Number(Math.round(n)).toLocaleString('id-ID');}
+function setPkg(k,el){selPkg=pkgData[k];document.querySelectorAll('.pb').forEach(function(b){b.classList.remove('active');});el.classList.add('active');document.getElementById('pkg-info').textContent=selPkg.icon+' '+selPkg.name.toUpperCase()+' — '+rp(selPkg.harga);hitung();}
+function hitung(){
+  var rek=parseInt(document.getElementById('rek-sl').value);
+  document.getElementById('rek-v').textContent=rek+' orang';
+  var sp=rek*50000;
+  var tt=rek*2*5000*selPkg.mult;
+  var tot=sp+tt;
+  var roi=((tot/selPkg.harga)*100).toFixed(0);
+  document.getElementById('r-sp').textContent=rp(sp);
+  document.getElementById('r-tt').textContent=rp(tt);
+  document.getElementById('r-tot').textContent=rp(tot);
+  document.getElementById('r-roi').textContent='~'+roi+'%';
+}
+window.onload=function(){hitung();};
+</script>
+</body>
+</html>
