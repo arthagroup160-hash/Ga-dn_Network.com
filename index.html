@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GA-DN – Gunung Artha Digital Network</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+:root{--red:#CC0000;--gold:#C9A227;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:#0A0000;font-family:'EB Garamond',serif;color:#fff;overflow-x:hidden;padding-bottom:64px;}
+
+/* NAV TOP */
+.nav-top{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,0,0,.97);border-bottom:1px solid rgba(204,0,0,.35);height:52px;display:flex;align-items:stretch;}
+.nav-flag{width:7px;background:linear-gradient(180deg,#CC0000 50%,#fff 50%);flex-shrink:0;}
+.nav-inner{flex:1;display:flex;justify-content:space-between;align-items:center;padding:0 16px;}
+.nav-brand{font-family:'Cinzel Decorative',serif;font-size:18px;color:#CC0000;}
+.nav-sub{font-family:'Cinzel',serif;font-size:6px;letter-spacing:3px;color:rgba(204,0,0,.5);text-transform:uppercase;}
+.nav-wa{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;background:linear-gradient(135deg,#25d366,#128C7E);color:#fff;border:none;border-radius:3px;padding:7px 12px;cursor:pointer;text-transform:uppercase;text-decoration:none;}
+
+/* NAV BOTTOM */
+.nav-bot{position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(5,0,0,.98);border-top:1px solid rgba(204,0,0,.3);display:flex;height:62px;}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;color:rgba(204,0,0,.4);transition:all .2s;}
+.nb.active,.nb:hover{color:#FF4444;background:rgba(204,0,0,.07);}
+.nb-ic{font-size:20px;line-height:1;}
+.nb-lb{font-family:'Cinzel',serif;font-size:6.5px;letter-spacing:1.5px;text-transform:uppercase;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;position:relative;overflow:hidden;}
+.hero-ayat{background:linear-gradient(135deg,#8B0000,#CC0000,#8B0000);padding:10px 18px;text-align:center;margin-top:52px;}
+.ayat-ar{font-family:'EB Garamond',serif;font-size:14px;color:#fff;letter-spacing:1.5px;line-height:1.7;direction:rtl;}
+.ayat-ref{font-family:'Cinzel',serif;font-size:7px;letter-spacing:2.5px;color:rgba(255,200,200,.75);text-transform:uppercase;margin-top:3px;}
+
+.hero-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px 20px 20px;}
+.flag-accent{display:flex;width:60px;height:8px;margin:0 auto 14px;border:1px solid rgba(255,255,255,.2);}
+.flag-accent div{flex:1;}
+.hero-eyebrow{font-family:'Cinzel',serif;font-size:8px;letter-spacing:5px;color:rgba(204,0,0,.6);text-transform:uppercase;margin-bottom:10px;}
+.hero-title{font-family:'Cinzel Decorative',serif;font-size:clamp(42px,12vw,80px);font-weight:900;color:#CC0000;text-shadow:2px 2px 0 #8B0000,0 0 40px rgba(204,0,0,.3);line-height:1;margin-bottom:6px;}
+.hero-fullname{font-family:'Cinzel Decorative',serif;font-size:clamp(11px,2.5vw,16px);color:rgba(255,200,200,.6);margin-bottom:10px;letter-spacing:2px;}
+.hero-tagline{font-family:'Cinzel',serif;font-size:9px;letter-spacing:4px;color:rgba(204,0,0,.65);text-transform:uppercase;margin-bottom:18px;}
+.divider{display:flex;align-items:center;gap:10px;margin:12px auto;max-width:400px;}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,#CC0000,transparent);}
+.star{width:7px;height:7px;background:#CC0000;transform:rotate(45deg);}
+.hero-desc{font-size:clamp(14px,1.8vw,16px);color:rgba(255,220,220,.85);line-height:1.85;max-width:520px;margin:0 auto 24px;}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;width:100%;max-width:400px;margin:0 auto 28px;}
+.stat{background:rgba(204,0,0,.1);border:1px solid rgba(204,0,0,.3);padding:12px 10px;text-align:center;}
+.stat-v{font-family:'Cinzel Decorative',serif;font-size:18px;color:#CC0000;}
+.stat-l{font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;color:rgba(204,0,0,.6);text-transform:uppercase;margin-top:3px;}
+
+/* MENU CARDS */
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:580px;margin:0 auto;padding:0 16px 30px;}
+.menu-card{border:2px solid;padding:22px 16px;text-align:center;cursor:pointer;transition:all .25s;text-decoration:none;display:block;position:relative;overflow:hidden;}
+.menu-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.mc-red{background:linear-gradient(160deg,rgba(204,0,0,.1),rgba(10,0,0,.8));border-color:rgba(204,0,0,.4);}
+.mc-red::before{background:#CC0000;}
+.mc-red:hover{border-color:rgba(204,0,0,.8);transform:translateY(-3px);}
+.mc-gold{background:linear-gradient(160deg,rgba(201,162,39,.1),rgba(10,0,0,.8));border-color:rgba(201,162,39,.35);}
+.mc-gold::before{background:#C9A227;}
+.mc-gold:hover{border-color:rgba(201,162,39,.7);transform:translateY(-3px);}
+.mc-green{background:linear-gradient(160deg,rgba(78,203,113,.08),rgba(10,0,0,.8));border-color:rgba(78,203,113,.3);}
+.mc-green::before{background:#4ecb71;}
+.mc-green:hover{border-color:rgba(78,203,113,.6);transform:translateY(-3px);}
+.mc-silver{background:linear-gradient(160deg,rgba(180,180,180,.08),rgba(10,0,0,.8));border-color:rgba(180,180,180,.3);}
+.mc-silver::before{background:#C0C0C0;}
+.mc-silver:hover{border-color:rgba(180,180,180,.6);transform:translateY(-3px);}
+.mc-icon{font-size:30px;margin-bottom:8px;}
+.mc-title{font-family:'Cinzel',serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
+.mc-red .mc-title{color:#FF4444;}
+.mc-gold .mc-title{color:#C9A227;}
+.mc-green .mc-title{color:#4ecb71;}
+.mc-silver .mc-title{color:#C0C0C0;}
+.mc-desc{font-size:12px;color:rgba(255,220,220,.7);line-height:1.5;}
+
+.flag-bar{height:5px;background:linear-gradient(90deg,#CC0000 50%,#fff 50%);}
+
+/* FOOTER */
+footer{background:#050000;border-top:1px solid rgba(204,0,0,.2);padding:22px 20px;text-align:center;}
+.fbrand{font-family:'Cinzel Decorative',serif;font-size:14px;color:#CC0000;margin-bottom:4px;}
+.fsub{font-family:'Cinzel',serif;font-size:7px;letter-spacing:4px;color:rgba(204,0,0,.4);text-transform:uppercase;margin-bottom:8px;}
+.feco{font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;color:rgba(204,0,0,.3);text-transform:uppercase;}
+.ftagline{font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:3px;color:rgba(204,0,0,.25);text-transform:uppercase;margin-top:8px;}
+</style>
+</head>
+<body>
+
+<nav class="nav-top">
+  <div class="nav-flag"></div>
+  <div class="nav-inner">
+    <div><div class="nav-brand">GA-DN</div><div class="nav-sub">Gunung Artha Digital Network</div></div>
+    <a class="nav-wa" href="https://wa.me/6283871666136?text=Halo+GA-DN,+saya+tertarik+bergabung!" target="_blank">💬 WA</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-ayat">
+    <div class="ayat-ar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ &nbsp;·&nbsp; وَتَعَاوَنُوا عَلَى الْبِرِّ وَالتَّقْوَىٰ</div>
+    <div class="ayat-ref">QS. Al-Maidah : 2 — "Tolong-menolonglah dalam kebaikan dan ketakwaan"</div>
+  </div>
+
+  <div class="hero-body">
+    <div class="flag-accent"><div style="background:#CC0000;"></div><div style="background:#fff;"></div></div>
+    <div class="hero-eyebrow">Komunitas Digital · Gunungguruh · Sukabumi · 2026</div>
+    <div class="hero-title">GA-DN</div>
+    <div class="hero-fullname">Gunung Artha Digital Network</div>
+    <div class="hero-tagline">Membership Digital · Matrix 2x∞ · Berkah Bersama</div>
+    <div class="divider"><div class="star"></div></div>
+    <div class="hero-desc">
+      Bergabung, belajar, dan berkembang bersama.<br>
+      <strong style="color:rgba(255,100,100,.9);">Akses konten digital premium</strong> sekaligus<br>
+      <strong style="color:rgba(255,100,100,.9);">bangun jaringan & raih bonus berlimpah</strong>.
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-v">2x∞</div><div class="stat-l">Sistem Matrix</div></div>
+      <div class="stat"><div class="stat-v">3</div><div class="stat-l">Jenis Bonus</div></div>
+      <div class="stat"><div class="stat-v">Rp 50rb</div><div class="stat-l">Bonus Sponsor</div></div>
+      <div class="stat"><div class="stat-v">150rb</div><div class="stat-l">Mulai Dari</div></div>
+    </div>
+  </div>
+
+  <div class="menu-grid">
+    <a href="produk.html" class="menu-card mc-red">
+      <div class="mc-icon">📦</div>
+      <div class="mc-title">Produk & Paket</div>
+      <div class="mc-desc">Lihat paket membership & cara pembayaran</div>
+    </a>
+    <a href="bonus.html" class="menu-card mc-gold">
+      <div class="mc-icon">💰</div>
+      <div class="mc-title">Sistem Bonus</div>
+      <div class="mc-desc">3 jenis bonus & kalkulator potensi penghasilan</div>
+    </a>
+    <a href="daftar.html" class="menu-card mc-green">
+      <div class="mc-icon">✍️</div>
+      <div class="mc-title">Daftar Member</div>
+      <div class="mc-desc">Isi form & buat kartu member digital</div>
+    </a>
+    <a href="downline.html" class="menu-card mc-silver">
+      <div class="mc-icon">🌳</div>
+      <div class="mc-title">Downline & Sponsor</div>
+      <div class="mc-desc">Cek jaringan & bagikan link referral</div>
+    </a>
+  </div>
+
+  <div class="flag-bar"></div>
+</div>
+
+<footer>
+  <div class="fbrand">GA-DN · Gunung Artha Digital Network</div>
+  <div class="fsub">Komunitas Digital · Gunungguruh · Sukabumi · 2026</div>
+  <div class="feco">BTN · KTSadar · Saung Starling · TAMARA · GA-I · SDS</div>
+  <div class="flag-bar" style="max-width:100px;margin:10px auto;"></div>
+  <div class="ftagline">✦ Amanah · Barakah · Berkembang Bersama ✦</div>
+</footer>
+
+<nav class="nav-bot">
+  <a href="index.html" class="nb active"><div class="nb-ic">🏠</div><div class="nb-lb">Beranda</div></a>
+  <a href="produk.html" class="nb"><div class="nb-ic">📦</div><div class="nb-lb">Produk</div></a>
+  <a href="bonus.html" class="nb"><div class="nb-ic">💰</div><div class="nb-lb">Bonus</div></a>
+  <a href="daftar.html" class="nb"><div class="nb-ic">✍️</div><div class="nb-lb">Daftar</div></a>
+  <a href="downline.html" class="nb"><div class="nb-ic">🌳</div><div class="nb-lb">Jaringan</div></a>
+  <a href="admin.html" class="nb"><div class="nb-ic">⚙️</div><div class="nb-lb">Admin</div></a>
+</nav>
+</body>
+</html>
