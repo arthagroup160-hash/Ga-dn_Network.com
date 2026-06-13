@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin – GA-DN</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:#0A0000;font-family:'EB Garamond',serif;color:#fff;overflow-x:hidden;padding-top:52px;padding-bottom:68px;}
+.nav-top{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,0,0,.97);border-bottom:1px solid rgba(204,0,0,.35);height:52px;display:flex;align-items:stretch;}
+.nav-flag{width:7px;background:linear-gradient(180deg,#CC0000 50%,#fff 50%);flex-shrink:0;}
+.nav-inner{flex:1;display:flex;justify-content:space-between;align-items:center;padding:0 16px;}
+.nav-brand{font-family:'Cinzel Decorative',serif;font-size:16px;color:#CC0000;}
+.nav-sub{font-family:'Cinzel',serif;font-size:6px;letter-spacing:3px;color:rgba(204,0,0,.5);text-transform:uppercase;}
+.nav-wa{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;background:linear-gradient(135deg,#25d366,#128C7E);color:#fff;border:none;border-radius:3px;padding:7px 12px;cursor:pointer;text-transform:uppercase;text-decoration:none;}
+.nav-bot{position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(5,0,0,.98);border-top:1px solid rgba(204,0,0,.3);display:flex;height:62px;}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;color:rgba(204,0,0,.4);transition:all .2s;}
+.nb.active,.nb:hover{color:#FF4444;background:rgba(204,0,0,.07);}
+.nb-ic{font-size:20px;line-height:1;}.nb-lb{font-family:'Cinzel',serif;font-size:6.5px;letter-spacing:1.5px;text-transform:uppercase;}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px;}
+
+/* LOGIN */
+.login-screen{min-height:calc(100vh - 120px);display:flex;align-items:center;justify-content:center;}
+.login-box{background:rgba(204,0,0,.06);border:1px solid rgba(204,0,0,.25);padding:32px 28px;max-width:360px;width:100%;text-align:center;}
+.login-icon{font-size:48px;margin-bottom:12px;}
+.login-title{font-family:'Cinzel Decorative',serif;font-size:20px;color:#CC0000;margin-bottom:6px;}
+.login-sub{font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;color:rgba(204,0,0,.5);text-transform:uppercase;margin-bottom:20px;}
+.finp{width:100%;background:rgba(204,0,0,.06);border:1px solid rgba(204,0,0,.22);color:#FF4444;font-family:'EB Garamond',serif;font-size:15px;padding:10px 12px;outline:none;margin-bottom:10px;}
+.finp:focus{border-color:#CC0000;}
+.finp::placeholder{color:rgba(204,0,0,.35);}
+.btn-red{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;background:#CC0000;color:#fff;border:none;padding:13px 20px;cursor:pointer;text-transform:uppercase;font-weight:700;width:100%;}
+
+/* DASHBOARD */
+.dashboard{display:none;}
+.dash-header{display:flex;justify-content:space-between;align-items:center;padding:20px 0 16px;flex-wrap:wrap;gap:10px;}
+.dash-title{font-family:'Cinzel Decorative',serif;font-size:20px;color:#CC0000;}
+.dash-sub{font-family:'Cinzel',serif;font-size:7px;letter-spacing:3px;color:rgba(204,0,0,.5);text-transform:uppercase;}
+.btn-logout{font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;background:rgba(204,0,0,.15);color:#FF4444;border:1px solid rgba(204,0,0,.35);padding:7px 14px;cursor:pointer;text-transform:uppercase;}
+
+/* STATS */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:20px;}
+.sbox{background:rgba(204,0,0,.07);border:1px solid rgba(204,0,0,.2);padding:12px 10px;text-align:center;position:relative;}
+.sbox::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#CC0000,transparent);}
+.sl{font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;color:rgba(204,0,0,.6);text-transform:uppercase;margin-bottom:4px;}
+.sv{font-family:'Cinzel Decorative',serif;font-size:18px;color:#CC0000;}
+.ss{font-size:10px;color:rgba(204,0,0,.5);font-style:italic;margin-top:2px;}
+
+/* FORM TAMBAH */
+.form-box{background:rgba(204,0,0,.05);border:1px solid rgba(204,0,0,.2);padding:18px 16px;margin-bottom:20px;}
+.form-title{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:#CC0000;text-transform:uppercase;margin-bottom:14px;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.frow{margin-bottom:0;}
+.flbl{font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;color:rgba(204,0,0,.6);text-transform:uppercase;display:block;margin-bottom:4px;}
+.fsel{width:100%;background:rgba(204,0,0,.06);border:1px solid rgba(204,0,0,.22);color:#FF4444;font-family:'EB Garamond',serif;font-size:15px;padding:9px 12px;outline:none;}
+.fsel option{background:#1A0000;color:#FF4444;}
+.btn-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.btn-add{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;background:#CC0000;color:#fff;border:none;padding:11px 16px;cursor:pointer;text-transform:uppercase;font-weight:700;flex:1;}
+.btn-wa{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;background:linear-gradient(135deg,#25d366,#128C7E);color:#fff;border:none;padding:11px 16px;cursor:pointer;text-transform:uppercase;font-weight:700;flex:1;}
+
+/* FILTER */
+.filter-row{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+.filter-row .finp{flex:1;min-width:160px;}
+.filter-row .fsel{width:140px;}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;margin-bottom:12px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:560px;}
+th{font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:2px;text-transform:uppercase;padding:10px 8px;background:rgba(204,0,0,.15);color:rgba(255,150,150,.9);border-bottom:1px solid rgba(204,0,0,.3);text-align:left;white-space:nowrap;}
+td{padding:9px 8px;border-bottom:1px solid rgba(204,0,0,.1);color:rgba(255,220,220,.85);vertical-align:middle;}
+tr:nth-child(even) td{background:rgba(204,0,0,.03);}
+.badge-lunas{background:rgba(78,203,113,.12);color:#4ecb71;border:1px solid rgba(78,203,113,.3);font-family:'Cinzel',serif;font-size:7px;letter-spacing:1px;padding:2px 7px;white-space:nowrap;}
+.badge-pending{background:rgba(255,200,0,.08);color:#FFD700;border:1px solid rgba(255,200,0,.3);font-family:'Cinzel',serif;font-size:7px;letter-spacing:1px;padding:2px 7px;white-space:nowrap;}
+.act-btns{display:flex;flex-direction:column;gap:4px;}
+.act-wa{font-size:10px;background:rgba(37,211,102,.12);color:#25d366;border:1px solid rgba(37,211,102,.25);padding:4px 8px;cursor:pointer;width:100%;text-align:center;}
+.act-del{font-size:10px;background:rgba(204,0,0,.1);color:#FF4444;border:1px solid rgba(204,0,0,.25);padding:4px 8px;cursor:pointer;width:100%;text-align:center;}
+
+/* BOTTOM ACTIONS */
+.bottom-acts{display:flex;gap:8px;flex-wrap:wrap;}
+.btn-csv{font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;background:rgba(204,0,0,.12);color:#FF4444;border:1px solid rgba(204,0,0,.3);padding:9px 14px;cursor:pointer;text-transform:uppercase;}
+.btn-reset{font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;background:rgba(80,0,0,.3);color:#FF4444;border:1px solid rgba(100,0,0,.4);padding:9px 14px;cursor:pointer;text-transform:uppercase;}
+</style>
+</head>
+<body>
+
+<nav class="nav-top">
+  <div class="nav-flag"></div>
+  <div class="nav-inner">
+    <div><div class="nav-brand">GA-DN</div><div class="nav-sub">Dashboard Admin</div></div>
+    <a class="nav-wa" href="https://wa.me/6283871666136" target="_blank">💬 WA</a>
+  </div>
+</nav>
+
+<!-- LOGIN -->
+<div class="login-screen" id="login-screen">
+  <div class="login-box">
+    <div class="login-icon">🔐</div>
+    <div class="login-title">Admin GA-DN</div>
+    <div class="login-sub">Masukkan Password Admin</div>
+    <input class="finp" id="pw-input" type="password" placeholder="Password..." onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="btn-red" onclick="doLogin()">🔓 Masuk Dashboard</button>
+    <div style="font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;color:rgba(204,0,0,.35);text-transform:uppercase;margin-top:14px;">GA-DN · Gunung Artha Digital Network</div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dashboard wrap" id="dashboard">
+  <div class="dash-header">
+    <div>
+      <div class="dash-title">⚙️ Dashboard Admin</div>
+      <div class="dash-sub">GA-DN · Gunung Artha Digital Network</div>
+    </div>
+    <button class="btn-logout" onclick="logout()">✕ Keluar</button>
+  </div>
+
+  <!-- STATS -->
+  <div class="stat-grid">
+    <div class="sbox"><div class="sl">Total Member</div><div class="sv" id="adm-total">0</div><div class="ss">terdaftar</div></div>
+    <div class="sbox"><div class="sl" style="color:rgba(255,68,68,.6);">🌱 Starter</div><div class="sv" id="adm-starter" style="color:#FF4444;">0</div></div>
+    <div class="sbox"><div class="sl" style="color:rgba(192,192,192,.6);">🌿 Silver</div><div class="sv" id="adm-silver" style="color:#C0C0C0;">0</div></div>
+    <div class="sbox"><div class="sl" style="color:rgba(201,162,39,.6);">🌳 Gold</div><div class="sv" id="adm-gold" style="color:#C9A227;">0</div></div>
+    <div class="sbox"><div class="sl">Total Omzet</div><div class="sv" id="adm-omzet" style="font-size:13px;">Rp 0</div></div>
+    <div class="sbox"><div class="sl">Est. Bonus Keluar</div><div class="sv" id="adm-bonus" style="font-size:13px;">Rp 0</div></div>
+  </div>
+
+  <!-- FORM TAMBAH -->
+  <div class="form-box">
+    <div class="form-title">➕ Tambah Member Baru</div>
+    <div class="form-grid">
+      <div class="frow"><label class="flbl">Nama Lengkap</label><input class="finp" id="a-nama" placeholder="Nama..."></div>
+      <div class="frow"><label class="flbl">No. WhatsApp</label><input class="finp" id="a-hp" placeholder="08xx..."></div>
+      <div class="frow"><label class="flbl">Kota</label><input class="finp" id="a-kota" placeholder="Kota/Kabupaten"></div>
+      <div class="frow"><label class="flbl">ID Sponsor</label><input class="finp" id="a-sponsor" placeholder="ID Upline..."></div>
+      <div class="frow">
+        <label class="flbl">Paket</label>
+        <select class="fsel" id="a-paket">
+          <option value="Starter|150000">🌱 Starter — Rp 150.000</option>
+          <option value="Silver|300000">🌿 Silver — Rp 300.000</option>
+          <option value="Gold|500000">🌳 Gold — Rp 500.000</option>
+        </select>
+      </div>
+      <div class="frow">
+        <label class="flbl">Status Bayar</label>
+        <select class="fsel" id="a-bayar">
+          <option value="Lunas">✅ Lunas</option>
+          <option value="Pending">⏳ Pending</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-add" onclick="tambahMember()">➕ Tambah Member</button>
+      <button class="btn-wa" onclick="exportWA()">💬 Laporan ke WA</button>
+    </div>
+  </div>
+
+  <!-- FILTER & TABLE -->
+  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:#CC0000;text-transform:uppercase;margin-bottom:10px;">📋 Daftar Member</div>
+  <div class="filter-row">
+    <input class="finp" id="a-cari" placeholder="🔍 Cari nama / ID..." oninput="renderTabel()">
+    <select class="fsel" id="a-filter" onchange="renderTabel()" style="width:140px;">
+      <option value="">Semua Paket</option>
+      <option value="Starter">🌱 Starter</option>
+      <option value="Silver">🌿 Silver</option>
+      <option value="Gold">🌳 Gold</option>
+    </select>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>ID</th><th>Nama</th><th>WA</th><th>Paket</th><th>Sponsor</th><th>Status</th><th>Tgl</th><th>Aksi</th></tr></thead>
+      <tbody id="tbl-body"><tr><td colspan="8" style="text-align:center;padding:24px;color:rgba(255,220,220,.3);font-style:italic;">Belum ada member. Tambahkan via form di atas.</td></tr></tbody>
+    </table>
+  </div>
+  <div class="bottom-acts">
+    <button class="btn-csv" onclick="exportCSV()">📥 Export CSV</button>
+    <button class="btn-wa" style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;padding:9px 14px;cursor:pointer;text-transform:uppercase;" onclick="exportWA()">💬 Laporan WA</button>
+    <button class="btn-reset" onclick="hapusSemua()">🗑 Reset Data</button>
+  </div>
+</div>
+
+<nav class="nav-bot">
+  <a href="index.html" class="nb"><div class="nb-ic">🏠</div><div class="nb-lb">Beranda</div></a>
+  <a href="produk.html" class="nb"><div class="nb-ic">📦</div><div class="nb-lb">Produk</div></a>
+  <a href="bonus.html" class="nb"><div class="nb-ic">💰</div><div class="nb-lb">Bonus</div></a>
+  <a href="daftar.html" class="nb"><div class="nb-ic">✍️</div><div class="nb-lb">Daftar</div></a>
+  <a href="downline.html" class="nb"><div class="nb-ic">🌳</div><div class="nb-lb">Jaringan</div></a>
+  <a href="admin.html" class="nb active"><div class="nb-ic">⚙️</div><div class="nb-lb">Admin</div></a>
+</nav>
+
+<script>
+var PW='gadn2026';
+var members=JSON.parse(localStorage.getItem('gadn_members')||'[]');
+var counter=parseInt(localStorage.getItem('gadn_counter')||'1');
+var pkgC={Gold:'#C9A227',Silver:'#C0C0C0',Starter:'#FF4444'};
+var pkgI={Gold:'🌳',Silver:'🌿',Starter:'🌱'};
+
+function rp(n){return 'Rp '+Number(Math.round(n)).toLocaleString('id-ID');}
+function simpan(){localStorage.setItem('gadn_members',JSON.stringify(members));localStorage.setItem('gadn_counter',counter.toString());}
+
+function doLogin(){
+  var pw=document.getElementById('pw-input').value;
+  if(pw===PW){document.getElementById('login-screen').style.display='none';document.getElementById('dashboard').style.display='block';renderTabel();updateStats();}
+  else{alert('❌ Password salah!');}
+}
+function logout(){document.getElementById('login-screen').style.display='flex';document.getElementById('dashboard').style.display='none';document.getElementById('pw-input').value='';}
+
+function updateStats(){
+  document.getElementById('adm-total').textContent=members.length;
+  document.getElementById('adm-starter').textContent=members.filter(function(m){return m.paket==='Starter';}).length;
+  document.getElementById('adm-silver').textContent=members.filter(function(m){return m.paket==='Silver';}).length;
+  document.getElementById('adm-gold').textContent=members.filter(function(m){return m.paket==='Gold';}).length;
+  var omzet=members.reduce(function(a,m){return a+m.harga;},0);
+  document.getElementById('adm-omzet').textContent=rp(omzet);
+  document.getElementById('adm-bonus').textContent=rp(members.length*55000);
+}
+
+function tambahMember(){
+  var nama=document.getElementById('a-nama').value.trim();
+  var hp=document.getElementById('a-hp').value.trim();
+  if(!nama||!hp){alert('Nama & WA wajib diisi!');return;}
+  var pv=document.getElementById('a-paket').value.split('|');
+  var id='GD-2026-'+String(counter).padStart(3,'0');
+  counter++;
+  members.push({id:id,nama:nama,hp:hp,kota:document.getElementById('a-kota').value.trim()||'-',sponsor:document.getElementById('a-sponsor').value.trim()||'-',paket:pv[0],harga:parseInt(pv[1]),bayar:document.getElementById('a-bayar').value,tgl:new Date().toLocaleDateString('id-ID')});
+  simpan();renderTabel();updateStats();
+  ['a-nama','a-hp','a-kota','a-sponsor'].forEach(function(x){document.getElementById(x).value='';});
+  alert('✅ Member '+nama+' ('+id+') berhasil ditambahkan!');
+}
+
+function renderTabel(){
+  var cari=(document.getElementById('a-cari')||{value:''}).value.toLowerCase();
+  var fil=(document.getElementById('a-filter')||{value:''}).value;
+  var list=members.filter(function(m){
+    return(!cari||m.nama.toLowerCase().includes(cari)||m.id.toLowerCase().includes(cari))&&(!fil||m.paket===fil);
+  });
+  if(!list.length){document.getElementById('tbl-body').innerHTML='<tr><td colspan="8" style="text-align:center;padding:20px;color:rgba(255,220,220,.3);font-style:italic;">Tidak ada data.</td></tr>';return;}
+  var td='padding:9px 8px;border-bottom:1px solid rgba(204,0,0,.1);color:rgba(255,220,220,.85);';
+  document.getElementById('tbl-body').innerHTML=list.map(function(m){
+    var ri=members.indexOf(m);
+    return '<tr>'
+      +'<td style="'+td+'font-family:\'Courier New\',monospace;font-size:11px;color:#FF4444;">'+m.id+'</td>'
+      +'<td style="'+td+'font-weight:600;">'+m.nama+'</td>'
+      +'<td style="'+td+'"><a href="https://wa.me/'+m.hp.replace(/^0/,'62').replace(/\D/g,'')+'" target="_blank" style="color:#25d366;">'+m.hp+'</a></td>'
+      +'<td style="'+td+'"><span style="color:'+pkgC[m.paket]+';">'+pkgI[m.paket]+' '+m.paket+'</span><br><small style="color:rgba(204,0,0,.5);font-size:10px;">'+rp(m.harga)+'</small></td>'
+      +'<td style="'+td+'font-size:11px;color:rgba(255,220,220,.5);">'+m.sponsor+'</td>'
+      +'<td style="'+td+'"><span class="'+(m.bayar==='Lunas'?'badge-lunas':'badge-pending')+'">'+(m.bayar==='Lunas'?'✅ LUNAS':'⏳ PENDING')+'</span></td>'
+      +'<td style="'+td+'font-size:11px;color:rgba(255,220,220,.5);">'+m.tgl+'</td>'
+      +'<td style="'+td+'"><div class="act-btns">'
+      +'<button class="act-wa" onclick="kirimKartu('+ri+')">💬 WA</button>'
+      +'<button class="act-del" onclick="hapus('+ri+')">🗑 Hapus</button>'
+      +'</div></td>'
+      +'</tr>';
+  }).join('');
+}
+
+function hapus(i){if(!confirm('Hapus member '+members[i].nama+'?'))return;members.splice(i,1);simpan();renderTabel();updateStats();}
+
+function kirimKartu(i){
+  var m=members[i];
+  var hp=m.hp.replace(/^0/,'62').replace(/\D/g,'');
+  var msg='Assalamualaikum '+m.nama+' 🌿\n\n*بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ*\n\n*Selamat bergabung di GA-DN!* 🎉\n\n🪪 *KARTU MEMBER*\n▸ ID     : '+m.id+'\n▸ Nama   : '+m.nama+'\n▸ Paket  : '+pkgI[m.paket]+' '+m.paket+'\n▸ Harga  : '+rp(m.harga)+'\n▸ Tgl    : '+m.tgl+'\n\n💰 *BONUS AKTIF*\n▸ Sponsor : Rp 50.000/rekrutan\n▸ Titik   : Rp 5.000/member/level\n\n🔗 Link referral:\nhttps://hudri.github.io/ladang-digital/daftar.html?ref='+m.id+'\n\nYuk ajak 2 orang & mulai raih bonus! 🌳\n_GA-DN · 083871666136_';
+  window.open('https://wa.me/'+(hp||'6283871666136')+'?text='+encodeURIComponent(msg),'_blank');
+}
+
+function exportWA(){
+  if(!members.length){alert('Belum ada data!');return;}
+  var omzet=members.reduce(function(a,m){return a+m.harga;},0);
+  var list=members.map(function(m,i){return (i+1)+'. '+m.nama+' · '+m.id+' · '+pkgI[m.paket]+m.paket+' · '+m.bayar;}).join('\n');
+  var msg='📊 *LAPORAN MEMBER GA-DN*\n📅 '+new Date().toLocaleDateString('id-ID')+'\n\n▸ Total  : '+members.length+' member\n▸ Omzet  : '+rp(omzet)+'\n\n'+list+'\n\n_GA-DN · 083871666136_';
+  window.open('https://wa.me/6283871666136?text='+encodeURIComponent(msg),'_blank');
+}
+
+function exportCSV(){
+  if(!members.length){alert('Belum ada data!');return;}
+  var csv='ID,Nama,WA,Kota,Paket,Harga,Sponsor,Status,Tanggal\n'+members.map(function(m){return[m.id,m.nama,m.hp,m.kota,m.paket,m.harga,m.sponsor,m.bayar,m.tgl].join(',');}).join('\n');
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='gadn-'+Date.now()+'.csv';a.click();
+}
+
+function hapusSemua(){
+  if(!confirm('⚠️ HAPUS SEMUA DATA MEMBER? Tidak bisa dibatalkan!'))return;
+  members=[];counter=1;simpan();renderTabel();updateStats();
+}
+</script>
+</body>
+</html>
