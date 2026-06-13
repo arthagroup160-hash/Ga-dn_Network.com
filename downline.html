@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Downline & Sponsor – GA-DN</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:#0A0000;font-family:'EB Garamond',serif;color:#fff;overflow-x:hidden;padding-top:52px;padding-bottom:68px;}
+.nav-top{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,0,0,.97);border-bottom:1px solid rgba(204,0,0,.35);height:52px;display:flex;align-items:stretch;}
+.nav-flag{width:7px;background:linear-gradient(180deg,#CC0000 50%,#fff 50%);flex-shrink:0;}
+.nav-inner{flex:1;display:flex;justify-content:space-between;align-items:center;padding:0 16px;}
+.nav-brand{font-family:'Cinzel Decorative',serif;font-size:16px;color:#CC0000;}
+.nav-sub{font-family:'Cinzel',serif;font-size:6px;letter-spacing:3px;color:rgba(204,0,0,.5);text-transform:uppercase;}
+.nav-wa{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;background:linear-gradient(135deg,#25d366,#128C7E);color:#fff;border:none;border-radius:3px;padding:7px 12px;cursor:pointer;text-transform:uppercase;text-decoration:none;}
+.nav-bot{position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(5,0,0,.98);border-top:1px solid rgba(204,0,0,.3);display:flex;height:62px;}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;color:rgba(204,0,0,.4);transition:all .2s;}
+.nb.active,.nb:hover{color:#FF4444;background:rgba(204,0,0,.07);}
+.nb-ic{font-size:20px;line-height:1;}.nb-lb{font-family:'Cinzel',serif;font-size:6.5px;letter-spacing:1.5px;text-transform:uppercase;}
+.wrap{max-width:700px;margin:0 auto;padding:0 16px;}
+.ayat{background:linear-gradient(135deg,#8B0000,#CC0000,#8B0000);padding:10px 18px;text-align:center;}
+.ayat-ar{font-family:'EB Garamond',serif;font-size:14px;color:#fff;direction:rtl;line-height:1.7;}
+.ayat-ref{font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;color:rgba(255,200,200,.75);text-transform:uppercase;margin-top:3px;}
+.sec{padding:28px 0;}
+.badge{font-family:'Cinzel',serif;font-size:8px;letter-spacing:5px;color:rgba(204,0,0,.7);text-transform:uppercase;text-align:center;margin-bottom:8px;}
+.badge.w{color:rgba(255,255,255,.5);}
+.title{font-family:'Cinzel Decorative',serif;font-size:clamp(18px,4vw,24px);font-weight:700;text-align:center;margin-bottom:6px;}
+.title.white{color:#fff;}.title.red{color:#CC0000;}
+.divider{display:flex;align-items:center;gap:10px;margin:12px 0;}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,#CC0000,transparent);}
+.divider.w::before,.divider.w::after{background:linear-gradient(90deg,transparent,#fff,transparent);}
+.star{width:7px;height:7px;background:#CC0000;transform:rotate(45deg);}
+.star.w{background:#fff;}
+.flag-bar{height:5px;background:linear-gradient(90deg,#CC0000 50%,#fff 50%);}
+
+/* TABS */
+.tabs{display:flex;border-bottom:1px solid rgba(204,0,0,.3);margin-bottom:0;}
+.tab{flex:1;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:14px 10px;text-align:center;cursor:pointer;color:rgba(204,0,0,.5);border:none;background:none;transition:all .2s;border-bottom:2px solid transparent;}
+.tab.active{color:#FF4444;border-bottom-color:#CC0000;background:rgba(204,0,0,.05);}
+.tabview{display:none;padding:24px 0;}
+.tabview.active{display:block;}
+
+/* SEARCH BOX */
+.search-box{display:flex;gap:8px;margin-bottom:16px;}
+.finp{flex:1;background:rgba(204,0,0,.06);border:1px solid rgba(204,0,0,.22);color:#FF4444;font-family:'EB Garamond',serif;font-size:15px;padding:9px 12px;outline:none;}
+.finp:focus{border-color:#CC0000;}
+.finp::placeholder{color:rgba(204,0,0,.35);}
+.btn-red{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;background:#CC0000;color:#fff;border:none;padding:10px 16px;cursor:pointer;text-transform:uppercase;white-space:nowrap;}
+.btn-green{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;background:linear-gradient(135deg,#25d366,#128C7E);color:#fff;border:none;padding:10px 16px;cursor:pointer;text-transform:uppercase;white-space:nowrap;}
+
+/* STAT GRID */
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:16px;}
+.sbox{background:rgba(204,0,0,.07);border:1px solid rgba(204,0,0,.2);padding:12px 10px;text-align:center;position:relative;}
+.sbox::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#CC0000,transparent);}
+.sl{font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;color:rgba(204,0,0,.6);text-transform:uppercase;margin-bottom:4px;}
+.sv{font-family:'Cinzel Decorative',serif;font-size:18px;color:#CC0000;}
+.ss{font-size:10px;color:rgba(204,0,0,.5);font-style:italic;margin-top:2px;}
+
+/* TREE */
+.tree-wrap{overflow-x:auto;padding:10px 0;}
+.tree-inner{display:flex;flex-direction:column;align-items:center;min-width:260px;}
+.m-node{display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:50%;border:2px solid;text-align:center;}
+.mn-root{width:72px;height:72px;background:linear-gradient(135deg,#CC0000,#8B0000);border-color:#FF4444;box-shadow:0 0 18px rgba(204,0,0,.4);}
+.mn-l1{width:60px;height:60px;background:rgba(204,0,0,.15);border-color:rgba(204,0,0,.5);}
+.mn-l2{width:48px;height:48px;background:rgba(204,0,0,.06);border-color:rgba(204,0,0,.25);border-style:dashed;}
+.mn-ic{font-size:18px;line-height:1;}
+.mn-lb{font-family:'Cinzel',serif;font-size:6px;letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+.mn-root .mn-lb{color:#fff;}.mn-l1 .mn-lb{color:rgba(255,150,150,.9);}.mn-l2 .mn-lb{color:rgba(204,0,0,.5);}
+.conn-v{width:2px;background:rgba(204,0,0,.4);margin:0 auto;}
+.conn-h{height:1px;background:rgba(204,0,0,.35);}
+.level-row{display:flex;justify-content:center;gap:12px;}
+
+/* LINK BOX */
+.link-box{background:rgba(204,0,0,.06);border:1px solid rgba(204,0,0,.25);padding:14px 16px;margin-bottom:14px;}
+.link-label{font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:3px;color:rgba(204,0,0,.6);text-transform:uppercase;margin-bottom:8px;}
+.link-url{font-family:'Courier New',monospace;font-size:12px;color:#CC0000;word-break:break-all;background:rgba(0,0,0,.4);padding:8px 10px;border-radius:2px;margin-bottom:10px;}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;}
+.btn-row button{flex:1;}
+
+/* TEMPLATE CARDS */
+.tpl-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
+.tpl-card{background:#fff;border-left:4px solid #CC0000;border:1px solid rgba(204,0,0,.15);border-left:4px solid #CC0000;padding:14px 12px;cursor:pointer;text-align:left;transition:all .2s;}
+.tpl-card:hover{box-shadow:0 4px 14px rgba(204,0,0,.1);transform:translateY(-2px);}
+.tpl-icon{font-size:20px;margin-bottom:5px;}
+.tpl-title{font-family:'Cinzel',serif;font-size:10px;color:#8B0000;font-weight:700;margin-bottom:3px;}
+.tpl-desc{font-size:12px;color:#1A0000;line-height:1.5;}
+
+/* EST EARN */
+.est-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;text-align:center;}
+.eg{background:rgba(204,0,0,.06);border:1px solid rgba(204,0,0,.18);padding:12px 8px;}
+.eg-v{font-family:'Cinzel Decorative',serif;font-size:16px;color:#CC0000;}
+.eg-l{font-family:'Cinzel',serif;font-size:7px;letter-spacing:1px;color:rgba(204,0,0,.5);text-transform:uppercase;margin-top:3px;}
+</style>
+</head>
+<body>
+
+<nav class="nav-top">
+  <div class="nav-flag"></div>
+  <div class="nav-inner">
+    <div><div class="nav-brand">GA-DN</div><div class="nav-sub">Downline & Sponsor</div></div>
+    <a class="nav-wa" href="https://wa.me/6283871666136" target="_blank">💬 WA</a>
+  </div>
+</nav>
+
+<div class="ayat">
+  <div class="ayat-ar">وَتَعَاوَنُوا عَلَى الْبِرِّ وَالتَّقْوَىٰ</div>
+  <div class="ayat-ref">QS. Al-Maidah : 2 — "Tolong-menolonglah dalam kebaikan dan ketakwaan"</div>
+</div>
+
+<div class="wrap">
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('downline',this)">🌳 Pohon Downline</button>
+    <button class="tab" onclick="showTab('sponsor',this)">🔗 Halaman Sponsor</button>
+  </div>
+
+  <!-- TAB DOWNLINE -->
+  <div class="tabview active" id="tv-downline">
+    <div class="badge w">Cek Jaringan Saya</div>
+    <div class="title white">Pohon Downline Interaktif</div>
+    <p style="font-size:14px;color:rgba(255,220,220,.8);text-align:center;line-height:1.8;margin-bottom:16px;">Masukkan ID Member untuk melihat struktur jaringan Anda.</p>
+    <div class="divider w"><div class="star w"></div></div>
+
+    <div class="search-box">
+      <input class="finp" id="dl-id" placeholder="ID Member (contoh: GD-2026-001)">
+      <button class="btn-red" onclick="cariDownline()">🔍 Cari</button>
+    </div>
+
+    <div id="dl-stats" style="display:none;">
+      <div class="stat-grid">
+        <div class="sbox"><div class="sl">Total Downline</div><div class="sv" id="st-total">0</div><div class="ss">semua level</div></div>
+        <div class="sbox"><div class="sl">Level 1 Langsung</div><div class="sv" id="st-l1">0</div><div class="ss">rekrutan Anda</div></div>
+        <div class="sbox"><div class="sl">Est. Bonus Titik</div><div class="sv" id="st-bonus">Rp 0</div><div class="ss">bulan ini</div></div>
+        <div class="sbox"><div class="sl">Level Terdalam</div><div class="sv" id="st-lvl">0</div><div class="ss">generasi aktif</div></div>
+      </div>
+      <button class="btn-green" style="width:100%;padding:12px;margin-bottom:16px;" onclick="bagikanJaringan()">💬 Bagikan Jaringan via WA</button>
+    </div>
+
+    <div class="tree-wrap" id="tree-box">
+      <div style="text-align:center;color:rgba(255,220,220,.4);font-style:italic;font-size:14px;padding:40px 20px;">
+        Masukkan ID Member dan klik Cari<br>untuk melihat pohon downline Anda.<br><br>
+        <span style="font-size:12px;color:rgba(204,0,0,.4);">💡 Coba ketik: GD-2026-001 (data demo)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB SPONSOR -->
+  <div class="tabview" id="tv-sponsor">
+    <div class="badge w">Link Referral Personal</div>
+    <div class="title white">Halaman Sponsor Anda</div>
+    <p style="font-size:14px;color:rgba(255,220,220,.8);text-align:center;line-height:1.8;margin-bottom:16px;">Generate link — setiap pendaftar via link Anda otomatis jadi downline.</p>
+    <div class="divider w"><div class="star w"></div></div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+      <div><label style="font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;color:rgba(204,0,0,.6);text-transform:uppercase;display:block;margin-bottom:4px;">ID Member Anda</label>
+      <input class="finp" id="sp-id" placeholder="GD-2026-001" oninput="genLink()" style="width:100%;"></div>
+      <div><label style="font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;color:rgba(204,0,0,.6);text-transform:uppercase;display:block;margin-bottom:4px;">Nama Anda</label>
+      <input class="finp" id="sp-nama" placeholder="Nama Lengkap" oninput="genLink()" style="width:100%;"></div>
+    </div>
+
+    <div class="link-box">
+      <div class="link-label">🔗 Link Referral Personal</div>
+      <div class="link-url" id="ref-link">https://hudri.github.io/ladang-digital/daftar.html?ref=GD-2026-001</div>
+      <div class="btn-row">
+        <button class="btn-red" onclick="salinLink()">📋 Salin Link</button>
+        <button class="btn-green" onclick="tplPendek()">💬 Bagikan WA</button>
+      </div>
+    </div>
+
+    <!-- Estimasi -->
+    <div style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;color:rgba(204,0,0,.6);text-transform:uppercase;margin-bottom:8px;text-align:center;">📊 Estimasi Bonus Sponsor</div>
+    <div class="est-grid">
+      <div class="eg"><div class="eg-v">Rp 500rb</div><div class="eg-l">10 rekrutan</div></div>
+      <div class="eg"><div class="eg-v">Rp 1,25jt</div><div class="eg-l">25 rekrutan</div></div>
+      <div class="eg"><div class="eg-v">Rp 2,5jt</div><div class="eg-l">50 rekrutan</div></div>
+    </div>
+
+    <!-- Template -->
+    <div style="margin-top:20px;">
+      <div style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;color:rgba(204,0,0,.6);text-transform:uppercase;margin-bottom:10px;text-align:center;">📝 Template Pesan Rekrut</div>
+      <div class="tpl-grid">
+        <div class="tpl-card" onclick="tplPendek()">
+          <div class="tpl-icon">💬</div>
+          <div class="tpl-title">Pesan Singkat</div>
+          <div class="tpl-desc">WA personal, singkat & to the point</div>
+        </div>
+        <div class="tpl-card" onclick="tplPanjang()">
+          <div class="tpl-icon">📜</div>
+          <div class="tpl-title">Penjelasan Lengkap</div>
+          <div class="tpl-desc">Broadcast grup atau story WA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-bot">
+  <a href="index.html" class="nb"><div class="nb-ic">🏠</div><div class="nb-lb">Beranda</div></a>
+  <a href="produk.html" class="nb"><div class="nb-ic">📦</div><div class="nb-lb">Produk</div></a>
+  <a href="bonus.html" class="nb"><div class="nb-ic">💰</div><div class="nb-lb">Bonus</div></a>
+  <a href="daftar.html" class="nb"><div class="nb-ic">✍️</div><div class="nb-lb">Daftar</div></a>
+  <a href="downline.html" class="nb active"><div class="nb-ic">🌳</div><div class="nb-lb">Jaringan</div></a>
+  <a href="admin.html" class="nb"><div class="nb-ic">⚙️</div><div class="nb-lb">Admin</div></a>
+</nav>
+
+<script>
+function rp(n){return 'Rp '+Number(Math.round(n)).toLocaleString('id-ID');}
+var SITE='https://hudri.github.io/ladang-digital';
+
+function showTab(id,el){
+  document.querySelectorAll('.tabview').forEach(function(v){v.classList.remove('active');});
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  document.getElementById('tv-'+id).classList.add('active');
+  if(el)el.classList.add('active');
+}
+
+// ===== DOWNLINE TREE =====
+var db={
+  'GD-2026-001':{nama:'HUDRI',paket:'Gold',downline:['GD-2026-002','GD-2026-003']},
+  'GD-2026-002':{nama:'Ahmad F.',paket:'Silver',downline:['GD-2026-004','GD-2026-005']},
+  'GD-2026-003':{nama:'Siti R.',paket:'Starter',downline:['GD-2026-006']},
+  'GD-2026-004':{nama:'Budi S.',paket:'Starter',downline:[]},
+  'GD-2026-005':{nama:'Dewi A.',paket:'Silver',downline:[]},
+  'GD-2026-006':{nama:'Rini M.',paket:'Starter',downline:[]}
+};
+var pkgC={Gold:'#C9A227',Silver:'#C0C0C0',Starter:'#FF4444'};
+var pkgI={Gold:'🌳',Silver:'🌿',Starter:'🌱'};
+
+function cariDownline(){
+  var id=document.getElementById('dl-id').value.trim().toUpperCase();
+  if(!id){alert('Masukkan ID Member!');return;}
+  if(!db[id])db[id]={nama:'Member '+id,paket:'Starter',downline:[]};
+  document.getElementById('tree-box').innerHTML='<div class="tree-inner">'+renderNode(id,0)+'</div>';
+  var all=getAllDL(id);
+  document.getElementById('st-total').textContent=all.length;
+  document.getElementById('st-l1').textContent=db[id].downline.length;
+  document.getElementById('st-bonus').textContent=rp(all.length*5000);
+  document.getElementById('st-lvl').textContent=getMaxLvl(id,0);
+  document.getElementById('dl-stats').style.display='block';
+}
+
+function renderNode(id,lvl){
+  if(!db[id])return'';
+  var m=db[id];
+  var col=pkgC[m.paket]||'#FF4444';
+  var isRoot=lvl===0;
+  var cls=isRoot?'mn-root':lvl===1?'mn-l1':'mn-l2';
+  var sz=isRoot?'18px':lvl===1?'15px':'13px';
+  var html='<div style="display:flex;flex-direction:column;align-items:center;">'
+    +'<div class="m-node '+cls+'" style="position:relative;">'
+    +(isRoot?'<div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-family:\'Cinzel\',serif;font-size:6px;letter-spacing:1px;background:'+col+';color:#fff;padding:2px 5px;white-space:nowrap;">ANDA</div>':'')
+    +'<div class="mn-ic" style="font-size:'+sz+';">'+(isRoot?'👑':'👤')+'</div>'
+    +'<div class="mn-lb" style="color:'+col+';font-size:5.5px;">'+m.nama.split(' ')[0]+'</div>'
+    +'<div style="font-family:\'Cinzel\',serif;font-size:5px;color:rgba(204,0,0,.4);">'+id+'</div>'
+    +'</div>';
+  if(m.downline&&m.downline.length){
+    html+='<div class="conn-v" style="height:18px;"></div>';
+    if(m.downline.length>1){
+      html+='<div style="position:relative;width:'+(m.downline.length*70)+'px;">'
+        +'<div class="conn-h"></div>'
+        +'<div style="position:absolute;left:0;top:0;width:2px;height:16px;background:rgba(204,0,0,.35);"></div>'
+        +'<div style="position:absolute;right:0;top:0;width:2px;height:16px;background:rgba(204,0,0,.35);"></div>'
+        +'</div>';
+    }
+    html+='<div class="level-row" style="margin-top:16px;gap:10px;">';
+    m.downline.forEach(function(did){
+      html+='<div style="display:flex;flex-direction:column;align-items:center;">'
+        +(m.downline.length===1?'<div class="conn-v" style="height:16px;"></div>':'')
+        +renderNode(did,lvl+1)+'</div>';
+    });
+    html+='</div>';
+  }
+  html+='</div>';
+  return html;
+}
+
+function getAllDL(id){
+  var r=[];
+  if(!db[id])return r;
+  db[id].downline.forEach(function(d){r.push(d);r=r.concat(getAllDL(d));});
+  return r;
+}
+function getMaxLvl(id,cur){
+  if(!db[id]||!db[id].downline.length)return cur;
+  return Math.max.apply(null,db[id].downline.map(function(d){return getMaxLvl(d,cur+1);}));
+}
+
+function bagikanJaringan(){
+  var id=document.getElementById('dl-id').value.trim()||'GD-2026-001';
+  var total=document.getElementById('st-total').textContent;
+  var bonus=document.getElementById('st-bonus').textContent;
+  var msg='🌳 *JARINGAN GA-DN SAYA*\n\n▸ ID Saya    : '+id+'\n▸ Downline   : '+total+' member aktif\n▸ Est. Bonus : '+bonus+'/bulan\n\nMau bergabung? 👇\n'+SITE+'/daftar.html?ref='+id+'\n\n_GA-DN · 083871666136_';
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+}
+
+// ===== SPONSOR =====
+function genLink(){
+  var id=document.getElementById('sp-id').value.trim()||'GD-2026-001';
+  document.getElementById('ref-link').textContent=SITE+'/daftar.html?ref='+id;
+}
+function salinLink(){
+  var l=document.getElementById('ref-link').textContent;
+  if(navigator.clipboard){navigator.clipboard.writeText(l).then(function(){alert('✅ Link disalin!');});}
+  else{var t=document.createElement('textarea');t.value=l;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);alert('✅ Link disalin!');}
+}
+function tplPendek(){
+  var id=document.getElementById('sp-id').value.trim()||'GD-2026-001';
+  var nama=document.getElementById('sp-nama').value.trim()||'Saya';
+  var msg='Assalamualaikum 🌿\n\nAda info bisnis digital yang bermanfaat nih!\n\n*GA-DN — Gunung Artha Digital Network*\n✅ Akses konten premium pertanian & bisnis\n✅ Bonus sponsor Rp 50.000/rekrutan\n✅ Bonus titik Rp 5.000/member/level\n✅ Mulai hanya Rp 150.000\n\nDaftar via link saya 👇\n'+SITE+'/daftar.html?ref='+id+'\n\n_Salam, '+nama+' · '+id+'_';
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+}
+function tplPanjang(){
+  var id=document.getElementById('sp-id').value.trim()||'GD-2026-001';
+  var nama=document.getElementById('sp-nama').value.trim()||'Saya';
+  var msg='Assalamualaikum Warahmatullahi Wabarakatuh 🌿\n\n*بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ*\n\nBoleh saya berbagi info bisnis digital yang insyaAllah halal & bermanfaat?\n\n🌳 *GUNUNG ARTHA DIGITAL NETWORK (GA-DN)*\n\n📦 *PRODUK DIGITAL*\nMembership komunitas digital — akses konten pertanian, bisnis, spiritual, dan teknologi seumur hidup.\n\n💰 *3 BONUS*\n▸ Bonus Sponsor   : Rp 50.000/orang\n▸ Bonus Titik     : Rp 5.000/member/level (unlimited!)\n▸ Bonus Reward    : Hadiah mulai 10 downline\n\n📦 *PAKET*\n🌱 Starter : Rp 150.000\n🌿 Silver  : Rp 300.000\n🌳 Gold    : Rp 500.000\n\n✅ Dikelola BTN — Legal & Amanah\n✅ Sistem matrix 2x∞\n\n👇 Daftar via link saya:\n'+SITE+'/daftar.html?ref='+id+'\n\n_Sponsor: '+nama+' · '+id+'_\n_083871666136_\n\nJazakumullah khairan 🙏';
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+}
+
+window.onload=function(){
+  var p=new URLSearchParams(window.location.search);
+  var ref=p.get('ref');
+  if(ref){document.getElementById('dl-id').value=ref;document.getElementById('sp-id').value=ref;genLink();}
+};
+</script>
+</body>
+</html>
